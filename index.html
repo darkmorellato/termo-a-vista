@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo de Garantia Legal - a Vista</title>
+    <!-- Incluindo o script do Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Utilizando a fonte Inter do Google Fonts para uma estética moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .signature-line {
+            border-bottom: 2px dashed #d1d5db;
+        }
+        /* Estilos para campos inválidos */
+        .invalid-field {
+            border-color: #ef4444 !important;
+        }
+        /* Estilos específicos para impressão */
+        @media print {
+            body {
+                background-color: #fff !important;
+                margin: 0;
+                padding: 0;
+                font-size: 10pt;
+                color: #000;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-container {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100%;
+                width: 210mm;
+                height: 290mm;
+                margin: 0 auto;
+                padding: 10mm;
+            }
+            h1 { font-size: 14pt; }
+            h2 { font-size: 12pt; }
+            h3 { font-size: 11pt; }
+            p, ul, label, input, select { font-size: 10pt; }
+            .mb-2 { margin-bottom: 0.5rem !important; }
+            .mt-4 { margin-top: 0.75rem !important; }
+            .py-1 { padding-top: 0.25rem !important; padding-bottom: 0.25rem !important; }
+            .border-b-2 { border-bottom-width: 1px !important; }
+            input, select {
+                border: none !important;
+                padding: 0 !important;
+                display: inline-block;
+                width: auto;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: none;
+            }
+            .input-field-print {
+                display: block !important;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #000;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            .signature-line {
+                border-bottom: 2px solid #000 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 font-sans text-gray-800">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-3xl shadow-2xl border border-gray-200 print-container">
+
+        <!-- Seção: TERMO DE GARANTIA LEGAL -->
+        <div class="mb-8">
+            <!-- Título com o logo ao lado esquerdo -->
+            <div class="text-center mb-6 flex items-center justify-center">
+                <!--
+                    Ajustando o logo:
+                    - `w-20 h-20`: Define um tamanho fixo e quadrado para o contêiner da imagem.
+                    - `rounded-full`: Transforma o contêiner em um círculo perfeito.
+                    - `object-cover`: Garante que a imagem preencha todo o contêiner, mantendo sua proporção, e cortando as partes que sobrarem.
+                -->
+                <img id="logo-image" src="https://placehold.co/120x80/d1d5db/4b5563?text=Logo" alt="Placeholder para logo da loja" class="w-20 h-20 rounded-full border-2 border-gray-300 object-cover mr-4">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                    TERMO DE GARANTIA LEGAL
+                </h1>
+            </div>
+            <p id="miplace-info" class="text-center text-sm md:text-base text-gray-600 mt-2">
+                MiPlace
+            </p>
+            <hr class="border-t border-gray-300 mb-6 mt-4">
+
+            <!-- Nova seção para Dados da Venda e do Comprador -->
+            <div class="mb-6 pb-6 border-b-2 border-gray-300 no-print">
+                <h3 class="text-xs font-semibold mb-4 border-l-2 border-blue-500 pl-2 text-gray-700">INFORMAÇÕES DA VENDA E DO COMPRADOR</h3>
+                <div class="grid grid-cols-1 gap-6 text-sm mb-4">
+                    <div class="flex flex-col">
+                        <label for="purchase-location" class="font-semibold text-blue-700 mb-1">Local da compra</label>
+                        <select id="purchase-location" name="purchase-location" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 js-required">
+                            <option value="">Selecione o local da compra</option>
+                            <option value="Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10">Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10</option>
+                            <option value="Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01">Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01</option>
+                            <option value="Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05">Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05</option>
+                            <option value="Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30">Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30</option>
+                            <option value="Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16">Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+                    <div class="flex flex-col">
+                        <label for="buyer-name" class="font-semibold text-blue-700 mb-1">Nome do Comprador</label>
+                        <input type="text" id="buyer-name" name="buyer-name" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 js-required">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="cpf" class="font-semibold text-blue-700 mb-1">CPF</label>
+                        <input type="text" id="cpf" name="cpf" maxlength="14" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 js-required">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo do termo de garantia -->
+            <p class="text-sm text-gray-700 mb-4">
+                A MiPlace concede a presente garantia aos smartphones comercializados, em conformidade com as disposições da Lei nº 8.078/90 do Código de Defesa do Consumidor (CDC), garantindo ao consumidor cobertura contra defeitos de fabricação dentro dos prazos estabelecidos para cada marca.
+            </p>
+
+            <p class="text-sm text-gray-600 mb-6">
+                A garantia legal é de <strong>90 (noventa) dias</strong> a partir da data da compra, conforme determina o artigo 26, inciso II, do CDC. Para marcas que oferecem garantia adicional com o fabricante, a responsabilidade da MiPlace se limita aos primeiros 90 dias, sendo o período restante de responsabilidade exclusiva de cada fabricante, conforme artigo 18 do CDC.
+            </p>
+
+            <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Prazos de Garantia por Marca</h2>
+            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600 mb-6">
+                <li><strong>Xiaomi, Redmi e Poco:</strong> <strong>90 (noventa) dias</strong> de garantia exclusiva pela MiPlace.</li>
+                <li><strong>Realme, Samsung e Motorola:</strong> Garantia total de <strong>1 (um) ano</strong>. Os primeiros <strong>3 meses</strong> são de responsabilidade da MiPlace e os 9 meses restantes de responsabilidade do fabricante.</li>
+                <li><strong>Honor:</strong> Garantia total de <strong>2 (dois) anos</strong>. Os primeiros <strong>3 meses</strong> são cobertos pela MiPlace e o período restante (1 ano e 9 meses) é de responsabilidade do fabricante.</li>
+            </ul>
+
+            <h2 class="text-lg font-bold text-gray-700 mb-3 mt-6 border-l-4 border-blue-500 pl-2">Exclusões da Garantia</h2>
+            <p class="text-sm text-gray-600">
+                A garantia não cobre avarias decorrentes de <strong>mau uso, quedas, contato com líquidos, sobrecarga elétrica, intervenção técnica não autorizada</strong> ou qualquer outro dano acidental.
+            </p>
+
+            <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Processo de Acionamento</h2>
+            <p class="text-sm text-gray-600">
+                Para acionar a garantia, o consumidor deverá apresentar o termo de garantia e encaminhar o produto para análise técnica. A MiPlace tem até <strong>30 (trinta) dias</strong> para análise e eventual reparo, substituição ou reembolso a partir da data que o consumidor reportar o defeito do aparelho.
+            </p>
+            <p class="text-sm text-gray-600 mt-2">
+                Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente. Para mais informações, o consumidor poderá entrar em contato com a Miplace por meio dos canais de atendimento disponíveis, incluindo e-mail, telefone ou presencialmente em loja.
+            </p>
+
+            <!-- Parágrafo de confirmação com campos automáticos -->
+            <p class="text-sm text-gray-600 mt-4">
+                Eu, <span id="buyer-name-display" class="font-bold"></span>, CPF <span id="cpf-display" class="font-bold"></span>, confirmo que li e compreendi os termos desta garantia e que o aparelho adquirido encontra-se em pleno funcionamento no momento da compra.
+            </p>
+
+            <!-- Seção de assinatura -->
+            <div class="mt-7 pt-4 border-t-2 border-gray-300 text-sm">
+                <p class="text-gray-700 font-bold mb-2 text-center">Assinatura de ciência das informações acima,</p>
+                <div class="signature-line w-full h-12 mb-4"></div>
+                <div class="flex flex-col mt-2">
+                    <label for="date" class="font-semibold text-blue-700 mb-1">DATA</label>
+                    <input type="text" id="date" name="date" placeholder="dd/mm/yyyy" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 js-required">
+                </div>
+            </div>
+
+            <!-- Contato para Suporte com telefone dinâmico -->
+            <div class="mt-6 pt-4 border-t-2 border-gray-300">
+                <h3 class="text-md font-bold text-gray-700 mb-2">Contato para Suporte:</h3>
+                <p class="text-sm text-gray-600">
+                    <strong>Telefone:</strong> <span id="support-phone" class="font-bold"></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Mensagem de erro de validação (inicialmente oculta) -->
+        <div id="validation-message" class="hidden mt-4 p-4 text-sm font-semibold text-red-700 bg-red-100 rounded-lg border border-red-300 no-print">
+            Por favor, preencha todos os campos obrigatórios para poder imprimir.
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 no-print">
+            <button onclick="validateAndPrint()" class="bg-blue-600 text-white text-sm font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out shadow-md transform hover:scale-105">
+                Imprimir Termo
+            </button>
+            <button id="fill-date-btn" class="bg-green-500 text-white text-sm font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300 ease-in-out shadow-md transform hover:scale-105">
+                Preencher Data de Hoje
+            </button>
+            <button id="clear-btn" class="bg-red-500 text-white text-sm font-bold py-3 px-6 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out shadow-md transform hover:scale-105">
+                Limpar Campos
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Função para formatar a data (mantida)
+        function formatDate(dateInput) {
+            let value = dateInput.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '/' + value.substring(5, 9);
+            }
+            dateInput.value = value;
+        }
+
+        // Função para formatar o CPF
+        function formatCPF(cpfInput) {
+            let value = cpfInput.value.replace(/\D/g, '');
+            value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+            value = value.replace(/\.(\d{3})(\d)/, '.$1-$2');
+            cpfInput.value = value;
+        }
+
+        // Função para limpar todos os campos
+        function clearFields() {
+            const fields = document.querySelectorAll('.js-required');
+            fields.forEach(field => {
+                field.value = '';
+                field.classList.remove('invalid-field');
+            });
+            document.getElementById('validation-message').classList.add('hidden');
+            updateConfirmationText();
+            // Reseta as informações da loja para o padrão
+            document.getElementById('miplace-info').textContent = 'MiPlace';
+            document.getElementById('support-phone').textContent = '';
+            // Reseta o logo para o padrão
+            document.getElementById('logo-image').src = 'https://placehold.co/120x80/d1d5db/4b5563?text=Logo';
+        }
+
+        // Função para validar e imprimir
+        function validateAndPrint() {
+            const fields = document.querySelectorAll('.js-required');
+            let allFieldsFilled = true;
+
+            // Limpa a formatação de erro anterior
+            fields.forEach(field => {
+                field.classList.remove('invalid-field');
+            });
+
+            // Verifica cada campo
+            fields.forEach(field => {
+                if (field.value.trim() === '') {
+                    field.classList.add('invalid-field');
+                    allFieldsFilled = false;
+                }
+            });
+
+            const validationMessage = document.getElementById('validation-message');
+            if (allFieldsFilled) {
+                validationMessage.classList.add('hidden');
+                window.print();
+            } else {
+                validationMessage.classList.remove('hidden');
+                // Rola para o topo do formulário para exibir a mensagem de erro
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Event listener para o campo de data
+        const dateInput = document.getElementById('date');
+        dateInput.addEventListener('keyup', () => formatDate(dateInput));
+        
+        // Event listener para o campo de CPF
+        const cpfInput = document.getElementById('cpf');
+        cpfInput.addEventListener('input', () => formatCPF(cpfInput));
+
+
+        // Botão para preencher a data atual
+        document.getElementById('fill-date-btn').addEventListener('click', () => {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            dateInput.value = `${day}/${month}/${year}`;
+        });
+
+        // Botão para limpar campos
+        document.getElementById('clear-btn').addEventListener('click', clearFields);
+
+        // Obtém os elementos para exibir a localização e o telefone
+        const purchaseLocationSelect = document.getElementById('purchase-location');
+        const miplaceInfo = document.getElementById('miplace-info');
+        const supportPhoneSpan = document.getElementById('support-phone');
+
+        // Mapa de telefones por local de compra
+        const phoneMap = {
+            "Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10": "(19) 99497-5131 - Miplace Honor CNPJ 34.511.185/0001-10",
+            "Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01": "(19) 99451-0123 - Miplace Realme CNPJ 44.739.622/0001-01",
+            "Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05": "(19) 99152-2724 - Miplace XV CNPJ 13.787.408/0001-05",
+            "Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30": "(19) 99961-8865 - Miplace Premium CNPJ 58.186.781/0001-30 ",
+            "Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16": "(19) 97107-7066 - Miplace Kassouf CNPJ 58.495.100/0001-16"
+        };
+        
+        // Mapa de logos por local de compra, com URLs acessíveis
+        const logoMap = {
+            "Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10": "dp.jpg",
+            "Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01": "realme.jpg",
+            "Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05": "xv.jpg",
+            "Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30": "pr.jpg",
+            "Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16": "kf.jpg"
+        };
+
+        // Event listener para o campo de seleção de local de compra
+        purchaseLocationSelect.addEventListener('change', () => {
+            const selectedValue = purchaseLocationSelect.value;
+            const selectedText = purchaseLocationSelect.options[purchaseLocationSelect.selectedIndex].text;
+            const logoImage = document.getElementById('logo-image');
+
+            // Atualiza o nome da loja no termo de garantia
+            if (selectedText === "Selecione o local da compra") {
+                miplaceInfo.textContent = 'MiPlace';
+            } else {
+                miplaceInfo.textContent = selectedText;
+            }
+
+            // Atualiza o telefone de contato com base no mapa
+            const newPhoneNumber = phoneMap[selectedValue];
+            if (newPhoneNumber) {
+                supportPhoneSpan.textContent = newPhoneNumber;
+            } else {
+                // Se nenhuma loja válida for selecionada, remove o número de telefone.
+                supportPhoneSpan.textContent = '';
+            }
+
+            // Atualiza o logo com base no mapa
+            if (logoMap[selectedValue]) {
+                logoImage.src = logoMap[selectedValue];
+            } else {
+                logoImage.src = "https://placehold.co/120x80/d1d5db/4b5563?text=Logo";
+            }
+        });
+
+        // --- Adicionado para preenchimento automático do nome e CPF no termo de garantia ---
+        const buyerNameInput = document.getElementById('buyer-name');
+        const buyerNameDisplay = document.getElementById('buyer-name-display');
+        const cpfDisplay = document.getElementById('cpf-display');
+
+        // Função para atualizar o texto do parágrafo de confirmação
+        const updateConfirmationText = () => {
+            buyerNameDisplay.textContent = buyerNameInput.value;
+            cpfDisplay.textContent = cpfInput.value;
+        };
+
+        // Adiciona event listeners para os campos de nome e CPF
+        buyerNameInput.addEventListener('input', updateConfirmationText);
+        cpfInput.addEventListener('input', updateConfirmationText);
+    </script>
+</body>
+</html>
