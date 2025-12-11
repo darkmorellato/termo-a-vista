@@ -190,105 +190,105 @@
             <!-- NOVA SEÇÃO: DADOS PARA EMISSÃO DE NOTA FISCAL - QUEBRA DE PÁGINA AQUI -->
             <div class="mt-10 force-page-break">
                 <!-- Linha grossa superior conforme imagem -->
-                <div class="w-full border-t-4 border-gray-800 mb-6"></div>
+                <div class="w-full border-t-4 border-gray-800 mb-4"></div>
                 
-                <h2 class="text-center text-2xl font-medium text-gray-800 mb-4">DADOS PARA EMISSÃO DE NOTA FISCAL</h2>
+                <h2 class="text-center text-xl font-medium text-gray-800 mb-3">DADOS PARA EMISSÃO DE NOTA FISCAL</h2>
 
                 <!-- Separador inserido conforme solicitado -->
-                <hr class="border-t border-gray-300 mb-6">
+                <hr class="border-t border-gray-300 mb-4">
 
                 <!-- Cabeçalho INFORMAÇÕES DO CLIENTE (Novo) -->
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-3">
                     <div class="w-1 h-4 bg-blue-500 mr-2"></div>
                     <h3 class="text-sm font-bold text-gray-600 uppercase">INFORMAÇÕES DO CLIENTE</h3>
                 </div>
 
                 <!-- Campos do Comprador -->
-                <div class="mb-6">
+                <div class="mb-4">
                     <!-- Linha 1: Nome (75%) e Telefone (25%) -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-3">
                         <div class="md:col-span-3">
                             <label class="block text-sm font-bold text-blue-700 mb-1">Nome do Comprador</label>
-                            <input type="text" id="nf-buyer-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-buyer-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div class="md:col-span-1">
                             <label class="block text-sm font-bold text-blue-700 mb-1">Telefone</label>
-                            <input type="text" id="nf-buyer-phone" placeholder="(00) 00000-0000" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-buyer-phone" placeholder="(00) 00000-0000" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                     </div>
 
                     <!-- Linha 2: Data Nascimento, Email, CPF -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Data de Nascimento</label>
-                            <input type="text" id="nf-birthdate-main" maxlength="10" placeholder="dd/mm/yyyy" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-birthdate-main" maxlength="10" placeholder="dd/mm/yyyy" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Email</label>
-                            <input type="email" id="nf-email" placeholder="exemplo@email.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="email" id="nf-email" placeholder="exemplo@email.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">CPF</label>
-                            <input type="text" id="nf-cpf" maxlength="14" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-cpf" maxlength="14" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                     </div>
 
                     <!-- Linha 3: Endereço da Residência (Novo) -->
-                    <div class="mb-4 mt-4">
+                    <div class="mb-3 mt-3">
                         <label class="block text-sm font-bold text-blue-700 mb-1">Endereço da Residência, número e complemento</label>
-                        <input type="text" id="nf-address" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <input type="text" id="nf-address" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                     </div>
 
                     <!-- Linha 4: Bairro, CEP, Cidade e Data da Compra (Novo) -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Bairro</label>
-                            <input type="text" id="nf-neighborhood" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-neighborhood" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">CEP</label>
-                            <input type="text" id="nf-zipcode" placeholder="00000-000" maxlength="9" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-zipcode" placeholder="00000-000" maxlength="9" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Cidade</label>
-                            <input type="text" id="nf-city" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-city" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Data da Compra</label>
-                            <input type="text" id="nf-purchase-date" placeholder="dd/mm/yyyy" maxlength="10" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-purchase-date" placeholder="dd/mm/yyyy" maxlength="10" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                     </div>
                 </div>
 
                 <!-- Linha divisória para organizar as informações -->
-                <hr class="border-t border-gray-300 my-6">
+                <hr class="border-t border-gray-300 my-4">
 
                 <!-- Informações do Aparelho -->
                 <div class="mt-2">
-                    <div class="flex items-center mb-4">
+                    <div class="flex items-center mb-3">
                         <div class="w-1 h-4 bg-blue-500 mr-2"></div>
-                        <h3 class="text-sm font-bold text-gray-600 uppercase">INFORMAÇÕES DO APARELHO</h3>
+                        <h3 class="text-sm font-bold text-gray-600 uppercase">INFORMAÇÕES DA VENDA</h3>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Modelo Celular e Cor</label>
-                            <input type="text" id="nf-model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">IMEI</label>
-                            <input type="text" id="nf-imei" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-imei" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Valor do Aparelho</label>
-                            <input type="text" id="nf-value" placeholder="R$ 0,00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <input type="text" id="nf-value" placeholder="R$ 0,00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-blue-700 mb-1">Forma de Pagamento</label>
-                            <select id="nf-payment" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <select id="nf-payment" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
                                 <option value="">Selecione...</option>
                                 <option value="Dinheiro">Dinheiro</option>
                                 <option value="Pix">Pix</option>
@@ -298,6 +298,25 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- Seção Acessórios -->
+                    <div class="mt-4">
+                        <div class="flex items-center mb-3">
+                            <div class="w-1 h-4 bg-blue-500 mr-2"></div>
+                            <h3 class="text-sm font-bold text-gray-600 uppercase">ACESSÓRIOS</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                 <label class="block text-sm font-bold text-blue-700 mb-1">Descrição dos Acessórios</label>
+                                <input type="text" id="nf-accessories" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-blue-700 mb-1">Valor Total</label>
+                                <input type="text" id="nf-total-value" placeholder="R$ 0,00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white js-required">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -455,6 +474,10 @@
         // Adiciona o listener para o campo de Valor do Aparelho
         const nfValueInput = document.getElementById('nf-value');
         nfValueInput.addEventListener('input', () => formatCurrency(nfValueInput));
+
+        // Adiciona o listener para o novo campo de Valor Total (Acessórios)
+        const nfTotalValueInput = document.getElementById('nf-total-value');
+        nfTotalValueInput.addEventListener('input', () => formatCurrency(nfTotalValueInput));
 
         // Adiciona o listener para o campo de CEP (Novo)
         const nfZipcodeInput = document.getElementById('nf-zipcode');
