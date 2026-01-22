@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termo de Garantia Legal - a Vista</title>
+    <title>Termo de Garantia Legal - MiPlace</title>
     <!-- Incluindo o script do Tailwind CSS para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Utilizando a fonte Inter do Google Fonts para uma estética moderna -->
@@ -55,7 +55,8 @@
             h1 { font-size: 14pt; }
             h2 { font-size: 12pt; }
             h3 { font-size: 11pt; }
-            p, ul, label, input, select { font-size: 10pt; }
+            h4 { font-size: 10pt; font-weight: bold; margin-top: 10px; margin-bottom: 5px; }
+            p, ul, label, input, select, li { font-size: 10pt; }
             .mb-2 { margin-bottom: 0.5rem !important; }
             .mt-4 { margin-top: 0.75rem !important; }
             .py-1 { padding-top: 0.25rem !important; padding-bottom: 0.25rem !important; }
@@ -87,18 +88,22 @@
 
     <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-3xl shadow-2xl border border-gray-200 print-container">
 
+        <!-- Seção: SELEÇÃO DE TIPO DE TERMO (Não imprime) -->
+        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg no-print">
+            <label for="term-type" class="block text-sm font-bold text-blue-800 mb-2">Selecione o Tipo de Termo de Garantia:</label>
+            <select id="term-type" class="w-full px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-semibold text-gray-700">
+                <option value="standard">Linha Android Novo</option>
+                <option value="iphone">iPhone Lacrado Garantia Apple</option>
+                <option value="seminovo">iPhone Semi-novos</option>
+            </select>
+        </div>
+
         <!-- Seção: TERMO DE GARANTIA LEGAL -->
         <div class="mb-8">
             <!-- Título com o logo ao lado esquerdo -->
             <div class="text-center mb-6 flex items-center justify-center">
-                <!--
-                    Ajustando o logo:
-                    - `w-20 h-20`: Define um tamanho fixo e quadrado para o contêiner da imagem.
-                    - `rounded-full`: Transforma o contêiner em um círculo perfeito.
-                    - `object-cover`: Garante que a imagem preencha todo o contêiner, mantendo sua proporção, e cortando as partes que sobrarem.
-                -->
                 <img id="logo-image" src="https://placehold.co/120x80/d1d5db/4b5563?text=Logo" alt="Placeholder para logo da loja" class="w-20 h-20 rounded-full border-2 border-gray-300 object-cover mr-4">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                <h1 id="main-title" class="text-2xl md:text-3xl font-bold text-gray-800">
                     TERMO DE GARANTIA LEGAL
                 </h1>
             </div>
@@ -135,39 +140,169 @@
                 </div>
             </div>
 
-            <!-- Conteúdo do termo de garantia -->
-            <p class="text-sm text-gray-700 mb-4">
-                A MiPlace concede a presente garantia aos smartphones comercializados, em conformidade com as disposições da Lei nº 8.078/90 do Código de Defesa do Consumidor (CDC), garantindo ao consumidor cobertura contra defeitos de fabricação dentro dos prazos estabelecidos para cada marca.
-            </p>
+            <!-- CONTEÚDO PADRÃO (Multimarcas) -->
+            <div id="content-standard">
+                <p class="text-sm text-gray-700 mb-4">
+                    A MiPlace concede a presente garantia aos smartphones comercializados, em conformidade com as disposições da Lei nº 8.078/90 do Código de Defesa do Consumidor (CDC), garantindo ao consumidor cobertura contra defeitos de fabricação dentro dos prazos estabelecidos para cada marca.
+                </p>
 
-            <p class="text-sm text-gray-600 mb-6">
-                A garantia legal é de <strong>90 (noventa) dias</strong> a partir da data da compra, conforme determina o artigo 26, inciso II, do CDC. Para marcas que oferecem garantia adicional com o fabricante, a responsabilidade da MiPlace se limita aos primeiros 90 dias, sendo o período restante de responsabilidade exclusiva de cada fabricante, conforme artigo 18 do CDC.
-            </p>
+                <p class="text-sm text-gray-600 mb-6">
+                    A garantia legal é de <strong>90 (noventa) dias</strong> a partir da data da compra, conforme determina o artigo 26, inciso II, do CDC. Para marcas que oferecem garantia adicional com o fabricante, a responsabilidade da MiPlace se limita aos primeiros 90 dias, sendo o período restante de responsabilidade exclusiva de cada fabricante, conforme artigo 18 do CDC.
+                </p>
 
-            <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Prazos de Garantia por Marca</h2>
-            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600 mb-6">
-                <li><strong>Xiaomi, Redmi e Poco:</strong> <strong>90 (noventa) dias</strong> de garantia exclusiva pela MiPlace.</li>
-                <li><strong>Realme, Samsung e Motorola:</strong> Garantia total de <strong>1 (um) ano</strong>. Os primeiros <strong>3 meses</strong> são de responsabilidade da MiPlace e os 9 meses restantes de responsabilidade do fabricante.</li>
-                <li><strong>Honor:</strong> Garantia total de <strong>2 (dois) anos</strong>. Os primeiros <strong>3 meses</strong> são cobertos pela MiPlace e o período restante (1 ano e 9 meses) é de responsabilidade do fabricante.</li>
-            </ul>
+                <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Prazos de Garantia por Marca</h2>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600 mb-6">
+                    <li><strong>Xiaomi, Redmi e Poco:</strong> <strong>90 (noventa) dias</strong> de garantia exclusiva pela MiPlace.</li>
+                    <li><strong>Realme, Samsung e Motorola:</strong> Garantia total de <strong>1 (um) ano</strong>. Os primeiros <strong>3 meses</strong> são de responsabilidade da MiPlace e os 9 meses restantes de responsabilidade do fabricante.</li>
+                    <li><strong>Honor:</strong> Garantia total de <strong>2 (dois) anos</strong>. Os primeiros <strong>3 meses</strong> são cobertos pela MiPlace e o período restante (1 ano e 9 meses) é de responsabilidade do fabricante.</li>
+                </ul>
 
-            <h2 class="text-lg font-bold text-gray-700 mb-3 mt-6 border-l-4 border-blue-500 pl-2">Exclusões da Garantia</h2>
-            <p class="text-sm text-gray-600">
-                A garantia não cobre avarias decorrentes de <strong>mau uso, quedas, contato com líquidos, sobrecarga elétrica, intervenção técnica não autorizada</strong> ou qualquer outro dano acidental.
-            </p>
+                <h2 class="text-lg font-bold text-gray-700 mb-3 mt-6 border-l-4 border-blue-500 pl-2">Exclusões da Garantia</h2>
+                <p class="text-sm text-gray-600">
+                    A garantia não cobre avarias decorrentes de <strong>mau uso, quedas, contato com líquidos, sobrecarga elétrica, intervenção técnica não autorizada</strong> ou qualquer outro dano acidental.
+                </p>
 
-            <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Processo de Acionamento</h2>
-            <p class="text-sm text-gray-600">
-                Para acionar a garantia, o consumidor deverá apresentar o termo de garantia e encaminhar o produto para análise técnica. A MiPlace tem até <strong>30 (trinta) dias</strong> para análise e eventual reparo, substituição ou reembolso a partir da data que o consumidor reportar o defeito do aparelho.
-            </p>
-            <p class="text-sm text-gray-600 mt-2">
-                Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente. Para mais informações, o consumidor poderá entrar em contato com a Miplace por meio dos canais de atendimento disponíveis, incluindo e-mail, telefone ou presencialmente em loja.
-            </p>
+                <h2 class="text-lg font-bold text-gray-700 mb-3 border-l-4 border-blue-500 pl-2">Processo de Acionamento</h2>
+                <p class="text-sm text-gray-600">
+                    Para acionar a garantia, o consumidor deverá apresentar o termo de garantia e encaminhar o produto para análise técnica. A MiPlace tem até <strong>30 (trinta) dias</strong> para análise e eventual reparo, substituição ou reembolso a partir da data que o consumidor reportar o defeito do aparelho.
+                </p>
+                <p class="text-sm text-gray-600 mt-2">
+                    Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente. Para mais informações, o consumidor poderá entrar em contato com a Miplace por meio dos canais de atendimento disponíveis, incluindo e-mail, telefone ou presencialmente em loja.
+                </p>
+            </div>
 
-            <!-- Parágrafo de confirmação com campos automáticos -->
-            <p class="text-sm text-gray-600 mt-4">
-                Eu, <span id="buyer-name-display" class="font-bold"></span>, CPF <span id="cpf-display" class="font-bold"></span>, confirmo que li e compreendi os termos desta garantia e que o aparelho adquirido encontra-se em pleno funcionamento no momento da compra.
-            </p>
+            <!-- CONTEÚDO IPHONE LACRADO (Apple) - Inicialmente Oculto -->
+            <div id="content-iphone" class="hidden">
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA PRIMEIRA - DA GARANTIA E RESPONSABILIDADE DO FABRICANTE</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>1.1. Garantia Mundial Apple:</strong> Por tratar-se de um produto novo e lacrado, a garantia é fornecida diretamente pela fabricante (Apple Inc.), com validade de 01 (um) ano a partir da data de ativação do dispositivo no sistema da Apple.
+                    </li>
+                    <li>
+                        <strong>1.2. Responsabilidade Exclusiva do Fabricante:</strong> A MiPlace atua estritamente como comercializadora do produto lacrado. Qualquer defeito de fabricação, vício de hardware ou falha de software deve ser tratado diretamente com o Suporte Oficial da Apple, que possui a responsabilidade integral pela cobertura e solução técnica.
+                    </li>
+                    <li>
+                        <strong>1.3. Abrangência:</strong> A garantia cobre defeitos de fabricação e problemas de hardware conforme as diretrizes globais da Apple.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA SEGUNDA - DA CONDIÇÃO DO PRODUTO E ATIVAÇÃO</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>2.1. Produto Lacrado:</strong> O Consumidor declara ter recebido o produto em sua embalagem original, devidamente lacrada, confirmando a integridade da caixa no ato da entrega.
+                    </li>
+                    <li>
+                        <strong>2.2. Validação da Garantia:</strong> A validação do período de garantia é realizada eletronicamente através do número de série/IMEI do aparelho, registrando-se automaticamente no sistema da Apple no momento em que o aparelho é ligado e conectado à internet pela primeira vez (Ativação).
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>3.1.</strong> A garantia da Apple será automaticamente anulada se o produto sofrer danos acidentais não cobertos (como telas quebradas, contato com líquidos ou carcaça amassada), salvo se o cliente possuir cobertura adicional AppleCare+ contratada à parte.
+                    </li>
+                    <li>
+                        <strong>3.2. Proibição de Intervenção Técnica:</strong> A garantia será anulada imediatamente caso o aparelho seja aberto, analisado ou reparado por qualquer assistência técnica não autorizada pela Apple, incluindo a própria loja MiPlace. O produto não deve sofrer intervenção de terceiros sob nenhuma hipótese.
+                    </li>
+                    <li>
+                        <strong>3.3. Softwares não Oficiais:</strong> A tentativa de desbloqueios (jailbreak) ou modificações profundas no sistema operacional iOS anula o suporte e a garantia do fabricante.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA QUARTA - PROCEDIMENTO PARA ACIONAMENTO</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>4.1. Canal de Atendimento:</strong> Em caso de defeito o acionamento deve ser feito diretamente com a Apple Brasil através do telefone 0800-761-0880 ou pelo site oficial (support.apple.com), agendando atendimento em uma Apple Store ou Centro de Serviço Autorizado (AASP).
+                    </li>
+                    <li>
+                        <strong>4.2. Isenção da Loja:</strong> A MiPlace não realiza análise técnica ou reparos em aparelhos novos/lacrados, a fim de preservar a garantia original do cliente junto ao fabricante.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA QUINTA - DA GESTÃO DA CONTA E SENHA PESSOAL</h2>
+                <p class="text-sm text-gray-700 mb-6 text-justify">
+                    <strong>5.1.</strong> A senha e a conta iCloud são de responsabilidade exclusiva do cliente, que as define no momento da ativação. A MiPlace não insere, armazena ou altera senhas. Qualquer bloqueio ou perda de acesso deve ser resolvido diretamente com o suporte da Apple, não havendo responsabilidade da loja por esquecimento, gerenciamento da conta ou recuperação de acesso.
+                </p>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA SEXTA - DISPOSIÇÕES FINAIS</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>6.1.</strong> O presente termo visa esclarecer o fluxo de garantia direta com o fabricante, assegurando ao consumidor o acesso a peças originais e serviço autorizado.
+                    </li>
+                    <li>
+                        <strong>6.2. Suporte:</strong> A MiPlace permanece à disposição para orientar o cliente sobre como localizar os canais de contato da Apple, caso necessário.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CONTEÚDO IPHONE SEMI-NOVO - Inicialmente Oculto -->
+            <div id="content-seminovo" class="hidden">
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA PRIMEIRA - PRAZO DA GARANTIA E COBERTURA DA LOJA</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>1.1. Garantia Legal:</strong> A garantia contra defeitos de fabricação para iPhones Semi-Novos é estipulada em 90 (noventa) dias corridos, a partir da data de compra.
+                    </li>
+                    <li>
+                        <strong>1.2. Responsabilidade Exclusiva da Loja:</strong> Durante este prazo de 90 (noventa) dias, a MiPlace assume integralmente a responsabilidade pela cobertura de defeitos de fabricação que comprometam o uso adequado do aparelho.
+                    </li>
+                    <li>
+                        <strong>1.3. Abrangência:</strong> A garantia é limitada a defeitos de hardware (peças) e funcionamento que sejam comprovadamente de origem técnica, manifestados durante o uso normal do aparelho.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA SEGUNDA - DA NATUREZA E CONDIÇÃO DO PRODUTO SEMI-NOVO</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>2.1. Ausência de Lacre Original:</strong> O Consumidor declara estar ciente e de acordo que o produto adquirido trata-se de um dispositivo SEMI-NOVO, comercializado fora de sua embalagem lacrada original de fábrica.
+                    </li>
+                    <li>
+                        <strong>2.2. Histórico e Manutenções Prévias:</strong> Em razão de não se ter conhecimento integral sobre o histórico de uso dos proprietários anteriores, o Consumidor reconhece que o aparelho pode ter sido submetido a procedimentos de abertura de chassi, manutenções ou substituição de peças/componentes internos.
+                    </li>
+                    <li>
+                        <strong>2.3. Aceite da Condição:</strong> O Consumidor aceita adquirir o bem no estado em que se encontra, incluindo a entrega do iPhone resetado, sem senha e sem vínculo com conta iCloud, ciente da possibilidade de existência de peças de reposição, não caracterizando tais fatos como vício oculto.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
+                <div class="text-sm text-gray-700 mb-6 text-justify">
+                    <p class="mb-2"><strong>3.1.</strong> A presente garantia não abrange, sob nenhuma hipótese, avarias decorrentes de:</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-3">
+                        <li>Mau uso ou desgaste natural do produto;</li>
+                        <li>Quedas ou impactos;</li>
+                        <li>Contato com líquidos (dano por umidade);</li>
+                        <li>Sobrecarga elétrica ou variações de energia;</li>
+                        <li>Intervenção técnica não autorizada (abertura, reparo ou modificação do aparelho por terceiros não credenciados);</li>
+                        <li>Qualquer outra situação que caracterize dano acidental ou uso inadequado.</li>
+                    </ul>
+                    <p class="mb-2"><strong>3.2.</strong> A violação dos selos/lacres de garantia da MiPlace ou o manuseio indevido, incluindo tentativa de jailbreak, atualizações beta ou alteração de software de forma não oficial, anula imediatamente a garantia.</p>
+                    <p><strong>3.3.</strong> A garantia não cobre a perda de dados, sendo de inteira responsabilidade do consumidor manter backups regulares de suas informações (iCloud/Computador).</p>
+                </div>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA QUARTA - PROCEDIMENTO E PRAZOS</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>4.1. Acionamento:</strong> Para acionar a garantia, o consumidor deverá apresentar este termo, encaminhando o produto à MiPlace para análise técnica.
+                    </li>
+                    <li>
+                        <strong>4.2. Prazo de Solução:</strong> Nos termos do artigo 18, §1º do Código de Defesa do Consumidor (CDC), a MiPlace dispõe do prazo legal de até 30 (trinta) dias para realizar a análise técnica e sanar o vício apresentado no produto.
+                    </li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-1">CLÁUSULA QUINTA - DISPOSIÇÕES FINAIS</h2>
+                <ul class="list-none space-y-3 text-sm text-gray-700 mb-6 text-justify">
+                    <li>
+                        <strong>5.1.</strong> Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente.
+                    </li>
+                    <li>
+                        <strong>5.2. Suporte e Contato:</strong> Para mais informações ou para acionar a garantia, o consumidor poderá entrar em contato com a MiPlace através de seus canais oficiais de atendimento e redes sociais.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Declaração Final Dinâmica -->
+            <div id="declaration-text" class="text-sm text-gray-600 mt-4 border-t pt-4">
+                 <!-- O texto aqui será inserido pelo JS -->
+            </div>
 
             <!-- Seção de assinatura -->
             <div class="mt-7 pt-4 border-t-2 border-gray-300 text-sm">
@@ -404,6 +539,72 @@
             input.value = value;
         }
 
+        // --- LÓGICA DE SELEÇÃO DO TIPO DE TERMO ---
+        const termTypeSelect = document.getElementById('term-type');
+        const contentStandard = document.getElementById('content-standard');
+        const contentIphone = document.getElementById('content-iphone');
+        const contentSeminovo = document.getElementById('content-seminovo');
+        const mainTitle = document.getElementById('main-title');
+        const declarationText = document.getElementById('declaration-text');
+        
+        // Elementos de entrada (para preencher o texto dinâmico)
+        const buyerNameInput = document.getElementById('buyer-name');
+        const cpfInput = document.getElementById('cpf');
+
+        function updateTermContent() {
+            const selectedType = termTypeSelect.value;
+            const name = buyerNameInput.value || "Nome do Cliente";
+            const cpf = cpfInput.value || "CPF";
+
+            // Esconde todos inicialmente
+            contentStandard.classList.add('hidden');
+            contentIphone.classList.add('hidden');
+            contentSeminovo.classList.add('hidden');
+
+            if (selectedType === 'iphone') {
+                // Modo iPhone Lacrado
+                contentIphone.classList.remove('hidden');
+                mainTitle.textContent = "TERMO DE GARANTIA - IPHONE LACRADO";
+                
+                // Declaração Específica iPhone Lacrado
+                declarationText.innerHTML = `
+                    <p class="mb-2">Eu, <span class="font-bold uppercase">${name}</span>, CPF <span class="font-bold">${cpf}</span>, confirmo que li e compreendi os termos acima.</p>
+                    <p>Declaro que recebi o iPhone <strong>NOVO E LACRADO</strong>, com a embalagem intacta. Estou ciente de que a garantia é de <strong>01 (um) ano diretamente com a Apple</strong>.</p>
+                `;
+            } else if (selectedType === 'seminovo') {
+                // Modo iPhone Semi-novo
+                contentSeminovo.classList.remove('hidden');
+                mainTitle.textContent = "TERMO DE GARANTIA - IPHONE SEMI-NOVO";
+
+                // Declaração Específica iPhone Semi-novo
+                declarationText.innerHTML = `
+                    <p class="mb-2">Eu, <span class="font-bold uppercase">${name}</span>, CPF <span class="font-bold">${cpf}</span>, confirmo que li e compreendi integralmente os termos desta garantia limitada de 90 (noventa) dias.</p>
+                    <p class="text-justify">Declaro estar expressamente ciente de que o iPhone adquirido é <strong>SEMI-NOVO</strong> e, portanto, pode ter passado por manutenções prévias ou possuir peças substituídas, tendo sido testado e aprovado funcionalmente pela loja. Confirmo que recebo o aparelho em pleno funcionamento.</p>
+                `;
+            } else {
+                // Modo Padrão
+                contentStandard.classList.remove('hidden');
+                mainTitle.textContent = "TERMO DE GARANTIA LEGAL";
+
+                // Declaração Padrão
+                declarationText.innerHTML = `
+                    Eu, <span class="font-bold uppercase">${name}</span>, CPF <span class="font-bold">${cpf}</span>, confirmo que li e compreendi os termos desta garantia e que o aparelho adquirido encontra-se em pleno funcionamento no momento da compra.
+                `;
+            }
+        }
+
+        // Listener para mudança no select
+        termTypeSelect.addEventListener('change', updateTermContent);
+
+        // Listeners para atualizar o nome/cpf em tempo real na declaração
+        buyerNameInput.addEventListener('input', updateTermContent);
+        cpfInput.addEventListener('input', updateTermContent);
+
+        // Inicializa o conteúdo correto ao carregar
+        updateTermContent();
+
+        // --- FIM LÓGICA DE SELEÇÃO ---
+
         // Função para limpar todos os campos
         function clearFields() {
             // Seleciona tanto campos required quanto os novos da NF
@@ -413,7 +614,7 @@
                 field.classList.remove('invalid-field');
             });
             document.getElementById('validation-message').classList.add('hidden');
-            updateConfirmationText();
+            updateTermContent(); // Atualiza o texto de confirmação com os campos vazios
             // Reseta as informações da loja para o padrão
             document.getElementById('miplace-info').textContent = 'MiPlace';
             document.getElementById('support-phone').textContent = '';
@@ -453,10 +654,6 @@
         // Event listener para o campo de data
         const dateInput = document.getElementById('date');
         dateInput.addEventListener('keyup', () => formatDate(dateInput));
-        
-        // Event listener para o campo de CPF
-        const cpfInput = document.getElementById('cpf');
-        cpfInput.addEventListener('input', () => formatCPF(cpfInput));
         
         // --- Novos Event Listeners para a seção NF ---
         const nfBirthMainInput = document.getElementById('nf-birthdate-main');
@@ -499,7 +696,6 @@
         
         // Sincronização automática opcional:
         // Se desejar que o Nome e CPF de cima preencham os de baixo automaticamente
-        const buyerNameInput = document.getElementById('buyer-name');
         buyerNameInput.addEventListener('input', () => {
             document.getElementById('nf-buyer-name').value = buyerNameInput.value;
         });
@@ -528,11 +724,11 @@
         
         // Mapa de logos por local de compra, com URLs acessíveis
         const logoMap = {
-            "Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10": "dp.jpg",
-            "Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01": "realme.jpg",
-            "Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05": "xv.jpg",
-            "Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30": "pr.jpg",
-            "Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16": "kf.jpg"
+            "Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10": "dp (1).jpg",
+            "Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01": "realme (1).jpg",
+            "Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05": "xv (1).jpg",
+            "Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30": "pr (1).jpg",
+            "Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16": "kf (1).jpg"
         };
 
         // Event listener para o campo de seleção de local de compra
@@ -564,21 +760,6 @@
                 logoImage.src = "https://placehold.co/120x80/d1d5db/4b5563?text=Logo";
             }
         });
-
-        // --- Adicionado para preenchimento automático do nome e CPF no termo de garantia ---
-        // OBS: 'buyerNameInput' já foi declarado acima, não deve ser redeclarado.
-        const buyerNameDisplay = document.getElementById('buyer-name-display');
-        const cpfDisplay = document.getElementById('cpf-display');
-
-        // Função para atualizar o texto do parágrafo de confirmação
-        const updateConfirmationText = () => {
-            buyerNameDisplay.textContent = buyerNameInput.value;
-            cpfDisplay.textContent = cpfInput.value;
-        };
-
-        // Adiciona event listeners para os campos de nome e CPF
-        buyerNameInput.addEventListener('input', updateConfirmationText);
-        cpfInput.addEventListener('input', updateConfirmationText);
     </script>
 </body>
 </html>
