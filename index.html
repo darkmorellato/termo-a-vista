@@ -145,7 +145,6 @@
             p, ul, label, li { font-size: 8.5pt !important; line-height: 1.2 !important; }
             .text-sm { font-size: 8.5pt !important; }
             .text-xs { font-size: 7.5pt !important; }
-            .text-[10px] { font-size: 7pt !important; }
             
             /* Inputs compactos */
             .vintage-input {
@@ -230,478 +229,981 @@
 <body class="bg-stone-900 p-4 md:p-10 font-serif text-stone-900 antialiased selection:bg-stone-300">
 
     <div class="max-w-4xl mx-auto">
-
-        <!-- Seção: SELEÇÃO DE TIPO DE TERMO (Painel de Controle Flutuante) -->
-        <div class="mb-8 p-6 bg-stone-800 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-stone-700 relative overflow-hidden no-print">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-stone-700 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
-            <label for="term-type" class="block text-xs font-bold text-stone-400 mb-2 uppercase tracking-widest font-sans">⚙️ Configuração do Documento</label>
-            <select id="term-type" class="w-full px-4 py-3 border border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 bg-stone-900 text-stone-100 font-sans font-semibold shadow-inner transition-all cursor-pointer">
-                <option value="standard">Linha Android Novo</option>
-                <option value="iphone">iPhone Lacrado Garantia Apple</option>
-                <option value="seminovo">iPhone Semi-novos</option>
-            </select>
+        <!-- Tabs de Navegação -->
+        <div class="flex space-x-4 mb-6 no-print">
+            <button id="tab-btn-new" class="flex-1 py-3 px-4 bg-stone-800 text-[#d6cfb8] rounded-t-lg font-bold border-b-2 border-[#d6cfb8] hover:bg-stone-700 transition-colors uppercase tracking-widest flex items-center justify-center gap-2">
+                📝 Novo Termo
+            </button>
+            <button id="tab-btn-history" class="flex-1 py-3 px-4 bg-stone-900 text-stone-500 rounded-t-lg font-bold border-b-2 border-stone-700 hover:bg-stone-800 hover:text-stone-300 transition-colors uppercase tracking-widest flex items-center justify-center gap-2">
+                🗂️ Histórico Diário
+            </button>
         </div>
 
-        <!-- FOLHA 1: O PAPEL DO CONTRATO -->
-        <div class="paper-bg p-8 md:p-16 rounded shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#d6cfb8] relative mb-12 print:mb-0">
-            
-            <!-- Marca D'água/Selo Canto Superior removido daqui e posicionado no header do formulário -->
-
-            <!-- Seção: TERMO DE GARANTIA LEGAL -->
-            <div class="mb-10">
-                <!-- Título com o logo ao lado esquerdo -->
-                <div class="text-center mb-2 flex flex-col md:flex-row items-center justify-center">
-                    <img id="logo-image" src="https://placehold.co/120x80/d1d5db/4b5563?text=Logo" alt="Placeholder para logo da loja" class="w-24 h-24 rounded-full border border-stone-800 p-1 mb-4 md:mb-0 md:mr-6 object-cover">
-                    <h1 id="main-title" class="text-3xl md:text-5xl font-normal text-stone-900 vintage-title text-center leading-tight">
-                        TERMO DE GARANTIA LEGAL
-                    </h1>
-                </div>
-                <p id="miplace-info" class="text-center text-sm md:text-base text-stone-700 mt-2 tracking-widest uppercase font-bold">
-                    MiPlace
-                </p>
-                
-                <!-- Divisor Ornamental Vintage -->
-                <div class="flex justify-center my-6 opacity-70">
-                    <svg width="250" height="24" viewBox="0 0 250 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M125 12 C 125 12 95 0 65 12 C 45 20 20 12 0 12" stroke="#443c33" stroke-width="1.5" fill="none"/>
-                        <path d="M125 12 C 125 12 155 0 185 12 C 205 20 230 12 250 12" stroke="#443c33" stroke-width="1.5" fill="none"/>
-                        <circle cx="125" cy="12" r="3" fill="#443c33"/>
-                        <circle cx="125" cy="12" r="6" stroke="#443c33" stroke-width="1" fill="none"/>
-                    </svg>
-                </div>
-
-                <!-- Nova seção para Dados da Venda e do Comprador -->
-                <div class="mb-8 pb-8 border-b border-stone-400 border-dashed no-print">
-                    <div class="flex items-center gap-4 mb-5">
-                        <h3 class="text-xs font-bold text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2 m-0">Informações da Venda e do Comprador</h3>
-                        <div class="transform -rotate-12 border-2 border-red-800 px-3 py-1 rounded mix-blend-multiply opacity-60">
-                            <p class="font-bold text-red-800 text-xs tracking-[0.2em] uppercase vintage-title">Authentic</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 gap-6 text-sm mb-6">
-                        <div class="flex flex-col">
-                            <label for="purchase-location" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Local da compra</label>
-                            <select id="purchase-location" name="purchase-location" class="vintage-input w-full js-required cursor-pointer">
-                                <option value="">Selecione o local da compra</option>
-                                <option value="Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10">Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10</option>
-                                <option value="Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01">Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01</option>
-                                <option value="Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05">Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05</option>
-                                <option value="Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30">Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30</option>
-                                <option value="Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16">Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 text-sm">
-                        <div class="flex flex-col md:col-span-2 print:col-span-2">
-                            <label for="buyer-name" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Nome do Comprador</label>
-                            <input type="text" id="buyer-name" name="buyer-name" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="cpf" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CPF</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="how-knew" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Conheceu a loja</label>
-                            <input list="how-knew-options" id="how-knew" name="how-knew" placeholder="Selecione a loja primeiro" class="vintage-input w-full js-required" disabled>
-                            <datalist id="how-knew-options">
-                            </datalist>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CONTEÚDO PADRÃO (Multimarcas) -->
-                <div id="content-standard" class="text-stone-900 leading-relaxed text-justify">
-                    <p class="mb-4">
-                        A MiPlace concede a presente garantia aos smartphones comercializados, em conformidade com as disposições da Lei nº 8.078/90 do Código de Defesa do Consumidor (CDC), garantindo ao consumidor cobertura contra defeitos de fabricação dentro dos prazos estabelecidos para cada marca.
-                    </p>
-
-                    <p class="mb-6">
-                        A garantia legal é de <strong class="font-bold">90 (noventa) dias</strong> a partir da data da compra, conforme determina o artigo 26, inciso II, do CDC. Para marcas que oferecem garantia adicional com o fabricante, a responsabilidade da MiPlace se limita aos primeiros 90 dias, sendo o período restante de responsabilidade exclusiva de cada fabricante, conforme artigo 18 do CDC.
-                    </p>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Prazos de Garantia por Marca</h2>
-                    <ul class="list-disc pl-5 space-y-2 mb-6 text-stone-800">
-                        <li><strong>Xiaomi, Redmi e Poco:</strong> <strong>90 (noventa) dias</strong> de garantia exclusiva pela MiPlace.</li>
-                        <li><strong>Realme, Samsung e Motorola:</strong> Garantia total de <strong>1 (um) ano</strong>. Os primeiros <strong>3 meses</strong> são de responsabilidade da MiPlace e os 9 meses restantes de responsabilidade do fabricante.</li>
-                        <li><strong>Honor:</strong> Garantia total de <strong>2 (dois) anos</strong>. Os primeiros <strong>3 meses</strong> são cobertos pela MiPlace e o período restante (1 ano e 9 meses) é de responsabilidade do fabricante.</li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Exclusões da Garantia</h2>
-                    <p class="mb-4 text-stone-800">
-                        A garantia não cobre avarias decorrentes de <strong>mau uso, quedas, contato com líquidos, sobrecarga elétrica, intervenção técnica não autorizada</strong> ou qualquer outro dano acidental.
-                    </p>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Processo de Acionamento</h2>
-                    <p class="mb-4 text-stone-800">
-                        Para acionar a garantia, o consumidor deverá apresentar o termo de garantia e encaminhar o produto para análise técnica. A MiPlace tem até <strong>30 (trinta) dias</strong> para análise e eventual reparo, substituição ou reembolso a partir da data que o consumidor reportar o defeito do aparelho.
-                    </p>
-                    <p class="mt-2 text-stone-800">
-                        Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente. Para mais informações, o consumidor poderá entrar em contato com a Miplace por meio dos canais de atendimento disponíveis, incluindo e-mail, telefone ou presencialmente em loja.
-                    </p>
-                </div>
-
-                <!-- CONTEÚDO IPHONE LACRADO (Apple) - Inicialmente Oculto -->
-                <div id="content-iphone" class="hidden text-stone-900 leading-relaxed text-justify">
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA PRIMEIRA - DA GARANTIA E RESPONSABILIDADE DO FABRICANTE</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>1.1. Garantia Mundial Apple:</strong> Por tratar-se de um produto novo e lacrado, a garantia é fornecida diretamente pela fabricante (Apple Inc.), com validade de 01 (um) ano a partir da data de ativação do dispositivo no sistema da Apple.
-                        </li>
-                        <li>
-                            <strong>1.2. Responsabilidade Exclusiva do Fabricante:</strong> A MiPlace atua estritamente como comercializadora do produto lacrado. Qualquer defeito de fabricação, vício de hardware ou falha de software deve ser tratado diretamente com o Suporte Oficial da Apple, que possui a responsabilidade integral pela cobertura e solução técnica.
-                        </li>
-                        <li>
-                            <strong>1.3. Abrangência:</strong> A garantia covers defeitos de fabricação e problemas de hardware conforme as diretrizes globais da Apple.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEGUNDA - DA CONDIÇÃO DO PRODUTO E ATIVAÇÃO</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>2.1. Produto Lacrado:</strong> O Consumidor declara ter recebido o produto em sua embalagem original, devidamente lacrada, confirmando a integridade da caixa no ato da entrega.
-                        </li>
-                        <li>
-                            <strong>2.2. Validação da Garantia:</strong> A validação do período de garantia é realizada eletronicamente através do número de série/IMEI do aparelho, registrando-se automaticamente no sistema da Apple no momento em que o aparelho é ligado e conectado à internet pela primeira vez (Ativação).
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>3.1.</strong> A garantia da Apple será automaticamente anulada se o produto sofrer danos acidentais não cobertos (como telas quebradas, contato com líquidos ou carcaça amassada), salvo se o cliente possuir cobertura adicional AppleCare+ contratada à parte.
-                        </li>
-                        <li>
-                            <strong>3.2. Proibição de Intervenção Técnica:</strong> A garantia será anulada imediatamente caso o aparelho seja aberto, analisado ou reparado por qualquer assistência técnica não autorizada pela Apple, incluindo a própria loja MiPlace. O produto não deve sofrer intervenção de terceiros sob nenhuma hipótese.
-                        </li>
-                        <li>
-                            <strong>3.3. Softwares não Oficiais:</strong> A tentativa de desbloqueios (jailbreak) ou modificações profundas no sistema operacional iOS anula o suporte e a garantia do fabricante.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUARTA - PROCEDIMENTO PARA ACIONAMENTO</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>4.1. Canal de Atendimento:</strong> Em caso de defeito o acionamento deve ser feito diretamente com a Apple Brasil através do telefone 0800-761-0880 ou pelo site oficial (support.apple.com), agendando atendimento em uma Apple Store ou Centro de Serviço Autorizado (AASP).
-                        </li>
-                        <li>
-                            <strong>4.2. Isenção da Loja:</strong> A MiPlace não realiza análise técnica ou reparos em aparelhos novos/lacrados, a fim de preservar a garantia original do cliente junto ao fabricante.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUINTA - DA GESTÃO DA CONTA E SENHA PESSOAL</h2>
-                    <p class="mb-6">
-                        <strong>5.1.</strong> A senha e a conta iCloud são de responsabilidade exclusiva do cliente, que as define no momento da ativação. A MiPlace não insere, armazena ou altera senhas. Qualquer bloqueio ou perda de acesso deve ser resolvido diretamente com o suporte da Apple, não havendo responsabilidade da loja por esquecimento, gerenciamento da conta ou recuperação de acesso.
-                    </p>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEXTA - DISPOSIÇÕES FINAIS</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>6.1.</strong> O presente termo visa esclarecer o fluxo de garantia direta com o fabricante, assegurando ao consumidor o acesso a peças originais e serviço autorizado.
-                        </li>
-                        <li>
-                            <strong>6.2. Suporte:</strong> A MiPlace permanece à disposição para orientar o cliente sobre como localizar os canais de contato da Apple, caso necessário.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- CONTEÚDO IPHONE SEMI-NOVO - Inicialmente Oculto -->
-                <div id="content-seminovo" class="hidden text-stone-900 leading-relaxed text-justify">
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA PRIMEIRA - PRAZO DA GARANTIA E COBERTURA DA LOJA</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>1.1. Garantia Legal:</strong> A garantia contra defeitos de fabricação para iPhones Semi-Novos é estipulada em 90 (noventa) dias corridos, a partir da data de compra.
-                        </li>
-                        <li>
-                            <strong>1.2. Responsabilidade Exclusiva da Loja:</strong> Durante este prazo de 90 (noventa) dias, a MiPlace assume integralmente a responsabilidade pela cobertura de defeitos de fabricação que comprometam o uso adequado do aparelho.
-                        </li>
-                        <li>
-                            <strong>1.3. Abrangência:</strong> A garantia é limitada a defeitos de hardware (peças) e funcionamento que sejam comprovadamente de origem técnica, manifestados durante o uso normal do aparelho.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEGUNDA - DA NATUREZA E CONDIÇÃO DO PRODUTO SEMI-NOVO</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>2.1. Ausência de Lacre Original:</strong> O Consumidor declara estar ciente e de acordo que o produto adquirido trata-se de um dispositivo SEMI-NOVO, comercializado fora de sua embalagem lacrada original de fábrica.
-                        </li>
-                        <li>
-                            <strong>2.2. Histórico e Manutenções Prévias:</strong> Em razão de não se ter conhecimento integral sobre o histórico de uso dos proprietários anteriores, o Consumidor reconhece que o aparelho pode ter sido submetido a procedimentos de abertura de chassi, manutenções ou substituição de peças/componentes internos.
-                        </li>
-                        <li>
-                            <strong>2.3. Aceite da Condição:</strong> O Consumidor aceita adquirir o bem no estado em que se encontra, incluindo a entrega do iPhone resetado, sem senha e sem vínculo com conta iCloud, ciente da possibility de existência de peças de reposição, não caracterizando tais fatos como vício oculto.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
-                    <div class="mb-6">
-                        <p class="mb-3"><strong>3.1.</strong> A presente garantia não abrange, sob nenhuma hipótese, avarias decorrentes de:</p>
-                        <ul class="list-disc pl-5 space-y-2 mb-4">
-                            <li>Mau uso ou desgaste natural do produto;</li>
-                            <li>Quedas ou impactos;</li>
-                            <li>Contato com líquidos (dano por umidade);</li>
-                            <li>Sobrecarga elétrica ou variações de energia;</li>
-                            <li>Intervenção técnica não autorizada (abertura, reparo ou modificação do aparelho por terceiros não credenciados);</li>
-                            <li>Qualquer outra situação que caracterize dano acidental ou uso inadequado.</li>
-                        </ul>
-                        <p class="mb-3"><strong>3.2.</strong> A violação dos selos/lacres de garantia da MiPlace ou o manuseio indevido, incluindo tentativa de jailbreak, atualizações beta ou alteração de software de forma não oficial, anula imediatamente a garantia.</p>
-                        <p><strong>3.3.</strong> A garantia não cobre a perda de dados, sendo de inteira responsabilidade do consumidor manter backups regulares de suas informações (iCloud/Computador).</p>
-                    </div>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUARTA - PROCEDIMENTO E PRAZOS</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>4.1. Acionamento:</strong> Para acionar a garantia, o consumidor deverá apresentar este termo, encaminhando o produto à MiPlace para análise técnica.
-                        </li>
-                        <li>
-                            <strong>4.2. Prazo de Solução:</strong> Nos termos do artigo 18, §1º do Código de Defesa do Consumidor (CDC), a MiPlace dispõe do prazo legal de até 30 (trinta) dias para realizar a análise técnica e sanar o vício apresentado no produto.
-                        </li>
-                    </ul>
-
-                    <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUINTA - DISPOSIÇÕES FINAIS</h2>
-                    <ul class="list-none space-y-4 mb-6">
-                        <li>
-                            <strong>5.1.</strong> Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente.
-                        </li>
-                        <li>
-                            <strong>5.2. Suporte e Contato:</strong> Para mais informações ou para acionar a garantia, o consumidor poderá entrar em contato com a MiPlace através de seus canais oficiais de atendimento e redes sociais.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Declaração Final Dinâmica -->
-                <div id="declaration-text" class="text-base text-stone-800 mt-6 border-t border-stone-400 border-dashed pt-6 italic">
-                     <!-- O texto aqui será inserido pelo JS -->
-                </div>
-
-                <!-- Seção de assinatura -->
-                <div class="mt-10 pt-4 text-base">
-                    <p class="text-stone-800 font-bold mb-8 text-center uppercase tracking-widest">In Witness Whereof, a ciência das informações acima,</p>
-                    <div class="signature-line w-full h-8 mb-4"></div>
-                    <div class="flex justify-between items-end mt-4 w-full">
-                        <div class="flex flex-col w-[45%] md:w-1/3">
-                            <label for="date" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data da Compra</label>
-                            <input type="text" id="date" name="date" placeholder="dd/mm/yyyy" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col w-[45%] md:w-1/3">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1 text-right">Conheceu a Miplace</label>
-                            <input type="text" id="display-how-knew" class="vintage-input w-full bg-transparent text-stone-800 pointer-events-none text-right" readonly tabindex="-1">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contato para Suporte com telefone dinâmico -->
-                <div class="mt-12 pt-6 border-t border-stone-400 border-dashed relative">
-                    <h3 class="text-sm font-bold text-stone-800 mb-2 uppercase tracking-widest">Contato para Suporte Oficial:</h3>
-                    <p class="text-base text-stone-900 font-['Caveat'] text-2xl">
-                        <span id="support-phone" class="font-bold"></span>
-                    </p>
-
-                    <!-- Selo Decorativo Final (Não imprime) -->
-                    <div class="absolute bottom-0 right-4 opacity-70 transform -rotate-6 hidden md:block border-2 border-red-700 p-1.5 rounded-sm no-print mix-blend-multiply">
-                        <p class="font-bold text-red-700 text-base tracking-widest uppercase vintage-title">MiPlace</p>
-                        <p class="text-[7px] text-center uppercase font-bold tracking-widest border-t border-red-700 pt-0.5 mt-0.5 text-red-700">Selo de Garantia</p>
-                    </div>
-                </div>
+        <!-- Conteúdo da Tab: NOVO TERMO -->
+        <div id="tab-content-new">
+            <!-- Seção: SELEÇÃO DE TIPO DE TERMO (Painel de Controle Flutuante) -->
+            <div class="mb-8 p-6 bg-stone-800 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-stone-700 relative overflow-hidden no-print">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-stone-700 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
+                <label for="term-type" class="block text-xs font-bold text-stone-400 mb-2 uppercase tracking-widest font-sans">⚙️ Configuração do Documento</label>
+                <select id="term-type" class="w-full px-4 py-3 border border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 bg-stone-900 text-stone-100 font-sans font-semibold shadow-inner transition-all cursor-pointer">
+                    <option value="standard">Linha Android Novo</option>
+                    <option value="iphone">iPhone Lacrado Garantia Apple</option>
+                    <option value="seminovo">iPhone Semi-novos</option>
+                </select>
             </div>
-        </div>
 
-        <!-- FOLHA 2: DADOS PARA EMISSÃO DE NOTA FISCAL -->
-        <div class="paper-bg p-8 md:p-16 rounded shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#d6cfb8] relative force-page-break print:mt-0">
-            
-            <div>
-                <div class="flex justify-center mb-6 opacity-70">
-                    <svg width="150" height="15" viewBox="0 0 150 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 7.5 H150" stroke="#443c33" stroke-width="2" stroke-dasharray="4 4"/>
-                    </svg>
-                </div>
+            <!-- FOLHA 1: O PAPEL DO CONTRATO -->
+            <div class="paper-bg p-8 md:p-16 rounded shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#d6cfb8] relative mb-12 print:mb-0">
                 
-                <h2 class="text-center text-3xl font-normal text-stone-900 mb-8 vintage-title tracking-wide">DADOS PARA EMISSÃO DE NOTA FISCAL</h2>
-
-                <!-- Cabeçalho INFORMAÇÕES DO CLIENTE -->
-                <div class="mb-8">
-                    <h3 class="text-xs font-bold mb-5 text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2">Informações do Cliente</h3>
+                <!-- Seção: TERMO DE GARANTIA LEGAL -->
+                <div class="mb-10">
+                    <!-- Título com o logo ao lado esquerdo -->
+                    <div class="text-center mb-2 flex flex-col md:flex-row items-center justify-center">
+                        <img id="logo-image" src="https://placehold.co/120x80/d1d5db/4b5563?text=Logo" alt="Placeholder para logo da loja" class="w-24 h-24 rounded-full border border-stone-800 p-1 mb-4 md:mb-0 md:mr-6 object-cover">
+                        <h1 id="main-title" class="text-3xl md:text-5xl font-normal text-stone-900 vintage-title text-center leading-tight">
+                            TERMO DE GARANTIA LEGAL
+                        </h1>
+                    </div>
+                    <p id="miplace-info" class="text-center text-sm md:text-base text-stone-700 mt-2 tracking-widest uppercase font-bold">
+                        MiPlace
+                    </p>
                     
-                    <!-- Linha 1: Nome e Telefone -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 mb-5">
-                        <div class="flex flex-col md:col-span-3 print:col-span-3">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Nome do Comprador</label>
-                            <input type="text" id="nf-buyer-name" class="vintage-input w-full js-required">
+                    <!-- Divisor Ornamental Vintage -->
+                    <div class="flex justify-center my-6 opacity-70">
+                        <svg width="250" height="24" viewBox="0 0 250 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M125 12 C 125 12 95 0 65 12 C 45 20 20 12 0 12" stroke="#443c33" stroke-width="1.5" fill="none"/>
+                            <path d="M125 12 C 125 12 155 0 185 12 C 205 20 230 12 250 12" stroke="#443c33" stroke-width="1.5" fill="none"/>
+                            <circle cx="125" cy="12" r="3" fill="#443c33"/>
+                            <circle cx="125" cy="12" r="6" stroke="#443c33" stroke-width="1" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <!-- Nova seção para Dados da Venda e do Comprador -->
+                    <div class="mb-8 pb-8 border-b border-stone-400 border-dashed no-print">
+                        <div class="flex items-center gap-4 mb-5">
+                            <h3 class="text-xs font-bold text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2 m-0">Informações da Venda e do Comprador</h3>
+                            <div class="transform -rotate-12 border-2 border-red-800 px-3 py-1 rounded mix-blend-multiply opacity-60">
+                                <p class="font-bold text-red-800 text-xs tracking-[0.2em] uppercase vintage-title">Authentic</p>
+                            </div>
                         </div>
-                        <div class="flex flex-col md:col-span-1 print:col-span-1">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Telefone</label>
-                            <input type="text" id="nf-buyer-phone" placeholder="(00) 00000-0000" class="vintage-input w-full js-required">
+                        <div class="grid grid-cols-1 gap-6 text-sm mb-6">
+                            <div class="flex flex-col">
+                                <label for="purchase-location" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Local da compra</label>
+                                <select id="purchase-location" name="purchase-location" class="vintage-input w-full js-required cursor-pointer">
+                                    <option value="">Selecione o local da compra</option>
+                                    <option value="Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10">Miplace Honor, Rua Dom Pedro II, 857 centro Piracicaba CNPJ 34511185/0001-10</option>
+                                    <option value="Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01">Miplace Realme, Rua Benjamin Constant, 1230 centro Piracicaba CNPJ 44739622/0001-01</option>
+                                    <option value="Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05">Miplace XV, Rua XV de Novembro, 910 centro Piracicaba CNPJ 13787408/0001-05</option>
+                                    <option value="Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30">Miplace Premium, Rua Treze de Maio, 26 centro Amparo CNPJ 58186781/0001-30</option>
+                                    <option value="Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16">Miplace Kassouf, Rua Treze de Maio 218 Sala 9, centro Amparo CNPJ 58495100/0001-16</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 text-sm">
+                            <div class="flex flex-col md:col-span-2 print:col-span-2">
+                                <label for="buyer-name" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Nome do Comprador</label>
+                                <input type="text" id="buyer-name" name="buyer-name" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="cpf" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CPF</label>
+                                <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="how-knew" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Conheceu a loja</label>
+                                <input list="how-knew-options" id="how-knew" name="how-knew" placeholder="Selecione a loja primeiro" class="vintage-input w-full js-required" disabled>
+                                <datalist id="how-knew-options">
+                                </datalist>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Linha 2: Data Nascimento, Email, CPF -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-6 mb-5">
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data de Nascimento</label>
-                            <input type="text" id="nf-birthdate-main" maxlength="10" placeholder="dd/mm/yyyy" class="vintage-input w-full js-required">
+                    <!-- CONTEÚDO PADRÃO (Multimarcas) -->
+                    <div id="content-standard" class="text-stone-900 leading-relaxed text-justify">
+                        <p class="mb-4">
+                            A MiPlace concede a presente garantia aos smartphones comercializados, em conformidade com as disposições da Lei nº 8.078/90 do Código de Defesa do Consumidor (CDC), garantindo ao consumidor cobertura contra defeitos de fabricação dentro dos prazos estabelecidos para cada marca.
+                        </p>
+
+                        <p class="mb-6">
+                            A garantia legal é de <strong class="font-bold">90 (noventa) dias</strong> a partir da data da compra, conforme determina o artigo 26, inciso II, do CDC. Para marcas que oferecem garantia adicional com o fabricante, a responsabilidade da MiPlace se limita aos primeiros 90 dias, sendo o período restante de responsabilidade exclusiva de cada fabricante, conforme artigo 18 do CDC.
+                        </p>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Prazos de Garantia por Marca</h2>
+                        <ul class="list-disc pl-5 space-y-2 mb-6 text-stone-800">
+                            <li><strong>Xiaomi, Redmi e Poco:</strong> <strong>90 (noventa) dias</strong> de garantia exclusiva pela MiPlace.</li>
+                            <li><strong>Realme, Samsung e Motorola:</strong> Garantia total de <strong>1 (um) ano</strong>. Os primeiros <strong>3 meses</strong> são de responsabilidade da MiPlace e os 9 meses restantes de responsabilidade do fabricante.</li>
+                            <li><strong>Honor:</strong> Garantia total de <strong>2 (dois) anos</strong>. Os primeiros <strong>3 meses</strong> são cobertos pela MiPlace e o período restante (1 ano e 9 meses) é de responsabilidade do fabricante.</li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Exclusões da Garantia</h2>
+                        <p class="mb-4 text-stone-800">
+                            A garantia não cobre avarias decorrentes de <strong>mau uso, quedas, contato com líquidos, sobrecarga elétrica, intervenção técnica não autorizada</strong> ou qualquer outro dano acidental.
+                        </p>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">Processo de Acionamento</h2>
+                        <p class="mb-4 text-stone-800">
+                            Para acionar a garantia, o consumidor deverá apresentar o termo de garantia e encaminhar o produto para análise técnica. A MiPlace tem até <strong>30 (trinta) dias</strong> para análise e eventual reparo, substituição ou reembolso a partir da data que o consumidor reportar o defeito do aparelho.
+                        </p>
+                        <p class="mt-2 text-stone-800">
+                            Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente. Para mais informações, o consumidor poderá entrar em contato com a Miplace por meio dos canais de atendimento disponíveis, incluindo e-mail, telefone ou presencialmente em loja.
+                        </p>
+                    </div>
+
+                    <!-- CONTEÚDO IPHONE LACRADO (Apple) - Inicialmente Oculto -->
+                    <div id="content-iphone" class="hidden text-stone-900 leading-relaxed text-justify">
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA PRIMEIRA - DA GARANTIA E RESPONSABILIDADE DO FABRICANTE</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>1.1. Garantia Mundial Apple:</strong> Por tratar-se de um produto novo e lacrado, a garantia é fornecida diretamente pela fabricante (Apple Inc.), com validade de 01 (um) ano a partir da data de ativação do dispositivo no sistema da Apple.
+                            </li>
+                            <li>
+                                <strong>1.2. Responsabilidade Exclusiva do Fabricante:</strong> A MiPlace atua estritamente como comercializadora do produto lacrado. Qualquer defeito de fabricação, vício de hardware ou falha de software deve ser tratado diretamente com o Suporte Oficial da Apple, que possui a responsabilidade integral pela cobertura e solução técnica.
+                            </li>
+                            <li>
+                                <strong>1.3. Abrangência:</strong> A garantia covers defeitos de fabricação e problemas de hardware conforme as diretrizes globais da Apple.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEGUNDA - DA CONDIÇÃO DO PRODUTO E ATIVAÇÃO</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>2.1. Produto Lacrado:</strong> O Consumidor declara ter recebido o produto em sua embalagem original, devidamente lacrada, confirmando a integridade da caixa no ato da entrega.
+                            </li>
+                            <li>
+                                <strong>2.2. Validação da Garantia:</strong> A validação do período de garantia é realizada eletronicamente através do número de série/IMEI do aparelho, registrando-se automaticamente no sistema da Apple no momento em que o aparelho é ligado e conectado à internet pela primeira vez (Ativação).
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>3.1.</strong> A garantia da Apple será automaticamente anulada se o produto sofrer danos acidentais não cobertos (como telas quebradas, contato com líquidos ou carcaça amassada), salvo se o cliente possuir cobertura adicional AppleCare+ contratada à parte.
+                            </li>
+                            <li>
+                                <strong>3.2. Proibição de Intervenção Técnica:</strong> A garantia será anulada imediatamente caso o aparelho seja aberto, analisado ou reparado por qualquer assistência técnica não autorizada pela Apple, incluindo a própria loja MiPlace. O produto não deve sofrer intervenção de terceiros sob nenhuma hipótese.
+                            </li>
+                            <li>
+                                <strong>3.3. Softwares não Oficiais:</strong> A tentativa de desbloqueios (jailbreak) ou modificações profundas no sistema operacional iOS anula o suporte e a garantia do fabricante.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUARTA - PROCEDIMENTO PARA ACIONAMENTO</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>4.1. Canal de Atendimento:</strong> Em caso de defeito o acionamento deve ser feito diretamente com a Apple Brasil através do telefone 0800-761-0880 ou pelo site oficial (support.apple.com), agendando atendimento em uma Apple Store ou Centro de Serviço Autorizado (AASP).
+                            </li>
+                            <li>
+                                <strong>4.2. Isenção da Loja:</strong> A MiPlace não realiza análise técnica ou reparos em aparelhos novos/lacrados, a fim de preservar a garantia original do cliente junto ao fabricante.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUINTA - DA GESTÃO DA CONTA E SENHA PESSOAL</h2>
+                        <p class="mb-6">
+                            <strong>5.1.</strong> A senha e a conta iCloud são de responsabilidade exclusiva do cliente, que as define no momento da ativação. A MiPlace não insere, armazena ou altera senhas. Qualquer bloqueio ou perda de acesso deve ser resolvido diretamente com o suporte da Apple, não havendo responsabilidade da loja por esquecimento, gerenciamento da conta ou recuperação de acesso.
+                        </p>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEXTA - DISPOSIÇÕES FINAIS</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>6.1.</strong> O presente termo visa esclarecer o fluxo de garantia direta com o fabricante, assegurando ao consumidor o acesso a peças originais e serviço autorizado.
+                            </li>
+                            <li>
+                                <strong>6.2. Suporte:</strong> A MiPlace permanece à disposição para orientar o cliente sobre como localizar os canais de contato da Apple, caso necessário.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- CONTEÚDO IPHONE SEMI-NOVO - Inicialmente Oculto -->
+                    <div id="content-seminovo" class="hidden text-stone-900 leading-relaxed text-justify">
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA PRIMEIRA - PRAZO DA GARANTIA E COBERTURA DA LOJA</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>1.1. Garantia Legal:</strong> A garantia contra defeitos de fabricação para iPhones Semi-Novos é estipulada em 90 (noventa) dias corridos, a partir da data de compra.
+                            </li>
+                            <li>
+                                <strong>1.2. Responsabilidade Exclusiva da Loja:</strong> Durante este prazo de 90 (noventa) dias, a MiPlace assume integralmente a responsabilidade pela cobertura de defeitos de fabricação que comprometam o uso adequado do aparelho.
+                            </li>
+                            <li>
+                                <strong>1.3. Abrangência:</strong> A garantia é limitada a defeitos de hardware (peças) e funcionamento que sejam comprovadamente de origem técnica, manifestados durante o uso normal do aparelho.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA SEGUNDA - DA NATUREZA E CONDIÇÃO DO PRODUTO SEMI-NOVO</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>2.1. Ausência de Lacre Original:</strong> O Consumidor declara estar ciente e de acordo que o produto adquirido trata-se de um dispositivo SEMI-NOVO, comercializado fora de sua embalagem lacrada original de fábrica.
+                            </li>
+                            <li>
+                                <strong>2.2. Histórico e Manutenções Prévias:</strong> Em razão de não se ter conhecimento integral sobre o histórico de uso dos proprietários anteriores, o Consumidor reconhece que o aparelho pode ter sido submetido a procedimentos de abertura de chassi, manutenções ou substituição de peças/componentes internos.
+                            </li>
+                            <li>
+                                <strong>2.3. Aceite da Condição:</strong> O Consumidor aceita adquirir o bem no estado em que se encontra, incluindo a entrega do iPhone resetado, sem senha e sem vínculo com conta iCloud, ciente da possibility de existência de peças de reposição, não caracterizando tais fatos como vício oculto.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA TERCEIRA - EXCLUSÃO E PERDA DA GARANTIA</h2>
+                        <div class="mb-6">
+                            <p class="mb-3"><strong>3.1.</strong> A presente garantia não abrange, sob nenhuma hipótese, avarias decorrentes de:</p>
+                            <ul class="list-disc pl-5 space-y-2 mb-4">
+                                <li>Mau uso ou desgaste natural do produto;</li>
+                                <li>Quedas ou impactos;</li>
+                                <li>Contato com líquidos (dano por umidade);</li>
+                                <li>Sobrecarga elétrica ou variações de energia;</li>
+                                <li>Intervenção técnica não autorizada (abertura, reparo ou modificação do aparelho por terceiros não credenciados);</li>
+                                <li>Qualquer outra situação que caracterize dano acidental ou uso inadequado.</li>
+                            </ul>
+                            <p class="mb-3"><strong>3.2.</strong> A violação dos selos/lacres de garantia da MiPlace ou o manuseio indevido, incluindo tentativa de jailbreak, atualizações beta ou alteração de software de forma não oficial, anula imediatamente a garantia.</p>
+                            <p><strong>3.3.</strong> A garantia não cobre a perda de dados, sendo de inteira responsabilidade do consumidor manter backups regulares de suas informações (iCloud/Computador).</p>
                         </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Email</label>
-                            <input type="email" id="nf-email" placeholder="exemplo@email.com" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CPF</label>
-                            <input type="text" id="nf-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" class="vintage-input w-full js-required">
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUARTA - PROCEDIMENTO E PRAZOS</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>4.1. Acionamento:</strong> Para acionar a garantia, o consumidor deverá apresentar este termo, encaminhando o produto à MiPlace para análise técnica.
+                            </li>
+                            <li>
+                                <strong>4.2. Prazo de Solução:</strong> Nos termos do artigo 18, §1º do Código de Defesa do Consumidor (CDC), a MiPlace dispõe do prazo legal de até 30 (trinta) dias para realizar a análise técnica e sanar o vício apresentado no produto.
+                            </li>
+                        </ul>
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUINTA - DISPOSIÇÕES FINAIS</h2>
+                        <ul class="list-none space-y-4 mb-6">
+                            <li>
+                                <strong>5.1.</strong> Este termo de garantia não exclui nem restringe os direitos assegurados ao consumidor pela legislação vigente.
+                            </li>
+                            <li>
+                                <strong>5.2. Suporte e Contato:</strong> Para mais informações ou para acionar a garantia, o consumidor poderá entrar em contato com a MiPlace através de seus canais oficiais de atendimento e redes sociais.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Declaração Final Dinâmica -->
+                    <div id="declaration-text" class="text-base text-stone-800 mt-6 border-t border-stone-400 border-dashed pt-6 italic">
+                         <!-- O texto aqui será inserido pelo JS -->
+                    </div>
+
+                    <!-- Seção de assinatura -->
+                    <div class="mt-10 pt-4 text-base">
+                        <p class="text-stone-800 font-bold mb-8 text-center uppercase tracking-widest">In Witness Whereof, a ciência das informações acima,</p>
+                        <div class="signature-line w-full h-8 mb-4"></div>
+                        <div class="flex justify-between items-end mt-4 w-full">
+                            <div class="flex flex-col w-[45%] md:w-1/3">
+                                <label for="date" class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data da Compra</label>
+                                <input type="text" id="date" name="date" placeholder="dd/mm/yyyy" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col w-[45%] md:w-1/3">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1 text-right">Conheceu a Miplace</label>
+                                <input type="text" id="display-how-knew" class="vintage-input w-full bg-transparent text-stone-800 pointer-events-none text-right" readonly tabindex="-1">
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Linha 3: Endereço da Residência, Número e Complemento -->
-                    <div class="grid grid-cols-1 md:grid-cols-[10fr_3fr_7fr] print:grid-cols-[10fr_3fr_7fr] gap-6 mb-5">
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Endereço da Residência</label>
-                            <input type="text" id="nf-address" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Número</label>
-                            <input type="text" id="nf-number" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Complemento</label>
-                            <input type="text" id="nf-complement" placeholder="Opcional" class="vintage-input w-full">
-                        </div>
-                    </div>
+                    <!-- Contato para Suporte com telefone dinâmico -->
+                    <div class="mt-12 pt-6 border-t border-stone-400 border-dashed relative">
+                        <h3 class="text-sm font-bold text-stone-800 mb-2 uppercase tracking-widest">Contato para Suporte Oficial:</h3>
+                        <p class="text-base text-stone-900 font-['Caveat'] text-2xl">
+                            <span id="support-phone" class="font-bold"></span>
+                        </p>
 
-                    <!-- Linha 4: Bairro, CEP, Cidade e Data da Compra -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 mb-5">
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Bairro</label>
-                            <input type="text" id="nf-neighborhood" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CEP</label>
-                            <input type="text" id="nf-zipcode" placeholder="00000-000" maxlength="9" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Cidade</label>
-                            <input type="text" id="nf-city" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data da Compra</label>
-                            <input type="text" id="nf-purchase-date" placeholder="dd/mm/yyyy" maxlength="10" class="vintage-input w-full js-required">
+                        <!-- Selo Decorativo Final (Não imprime) -->
+                        <div class="absolute bottom-0 right-4 opacity-70 transform -rotate-6 hidden md:block border-2 border-red-700 p-1.5 rounded-sm no-print mix-blend-multiply">
+                            <p class="font-bold text-red-700 text-base tracking-widest uppercase vintage-title">MiPlace</p>
+                            <p class="text-[7px] text-center uppercase font-bold tracking-widest border-t border-red-700 pt-0.5 mt-0.5 text-red-700">Selo de Garantia</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Divisor -->
-                <div class="flex justify-center my-6 opacity-40">
-                    <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 5 H100" stroke="#443c33" stroke-width="1"/>
-                    </svg>
-                </div>
-
-                <!-- Informações do Aparelho -->
+            <!-- FOLHA 2: DADOS PARA EMISSÃO DE NOTA FISCAL -->
+            <div class="paper-bg p-8 md:p-16 rounded shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#d6cfb8] relative force-page-break print:mt-0">
+                
                 <div>
-                    <h3 class="text-xs font-bold mb-5 text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2">Informações da Venda</h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-6 mb-5">
-                        <div class="flex flex-col md:col-span-3 print:col-span-3">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Marca</label>
-                            <select id="nf-brand" class="vintage-input w-full js-required cursor-pointer">
-                                <option value="">Selecione...</option>
-                                <option value="Honor">Honor</option>
-                                <option value="Iphone">Iphone</option>
-                                <option value="Motorola">Motorola</option>
-                                <option value="Poco">Poco</option>
-                                <option value="Realme">Realme</option>
-                                <option value="Redmi">Redmi</option>
-                                <option value="Samsung">Samsung</option>
-                            </select>
-                        </div>
-                        <div class="flex flex-col md:col-span-5 print:col-span-5">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Modelo Celular</label>
-                            <input type="text" id="nf-model" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col md:col-span-2 print:col-span-2">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">RAM/Storage</label>
-                            <select id="nf-ram-storage" class="vintage-input w-full js-required cursor-pointer">
-                                <option value="">Selecione...</option>
-                                <option value="4/128">4/128</option>
-                                <option value="6/128">6/128</option>
-                                <option value="8/128">8/128</option>
-                                <option value="4/256">4/256</option>
-                                <option value="4/512">4/512</option>
-                                <option value="8/256">8/256</option>
-                                <option value="8/512">8/512</option>
-                                <option value="12/256">12/256</option>
-                                <option value="12/512">12/512</option>
-                                <option value="16/256">16/256</option>
-                                <option value="16/512">16/512</option>
-                                <option value="16/1TB">16/1TB</option>
-                            </select>
-                        </div>
-                        <div class="flex flex-col md:col-span-2 print:col-span-2">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Cor</label>
-                            <input type="text" id="nf-color" class="vintage-input w-full js-required">
-                        </div>
+                    <div class="flex justify-center mb-6 opacity-70">
+                        <svg width="150" height="15" viewBox="0 0 150 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 7.5 H150" stroke="#443c33" stroke-width="2" stroke-dasharray="4 4"/>
+                        </svg>
                     </div>
+                    
+                    <h2 class="text-center text-3xl font-normal text-stone-900 mb-8 vintage-title tracking-wide">DADOS PARA EMISSÃO DE NOTA FISCAL</h2>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-6 mb-5">
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">IMEI</label>
-                            <input type="text" id="nf-imei" maxlength="15" inputmode="numeric" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Valor do Aparelho</label>
-                            <input type="text" id="nf-value" placeholder="R$ 0,00" class="vintage-input w-full js-required">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Forma de Pagamento</label>
-                            <select id="nf-payment" class="vintage-input w-full js-required cursor-pointer">
-                                <option value="">Selecione...</option>
-                                <option value="Crefaz">Crefaz</option>
-                                <option value="Dinheiro">Dinheiro</option>
-                                <option value="Pix">Pix</option>
-                                <option value="Crédito a vista">Crédito a vista</option>
-                                <option value="Crédito parcelado">Crédito parcelado</option>
-                                <option value="Débito">Débito</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Seção Acessórios -->
-                    <div class="mt-8">
-                        <div class="flex items-center justify-between mb-5 border-l-4 border-stone-800 pl-2">
-                            <h3 class="text-xs font-bold text-stone-800 uppercase tracking-widest">Acessórios</h3>
-                            <button type="button" id="add-accessory-btn" class="no-print bg-[#d6cfb8] text-stone-900 font-sans text-[10px] font-bold py-1 px-3 rounded hover:bg-[#c8c0a3] transition-all shadow-sm border border-[#a8a186] uppercase tracking-wider">
-                                + Adicionar Acessório
-                            </button>
-                        </div>
+                    <!-- Cabeçalho INFORMAÇÕES DO CLIENTE -->
+                    <div class="mb-8">
+                        <h3 class="text-xs font-bold mb-5 text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2">Informações do Cliente</h3>
                         
-                        <!-- Contêiner dinâmico onde os acessórios serão inseridos -->
-                        <div id="accessories-container" class="space-y-6">
-                            <!-- Linhas de acessórios injetadas pelo JS aparecerão aqui -->
+                        <!-- Linha 1: Nome e Telefone -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 mb-5">
+                            <div class="flex flex-col md:col-span-3 print:col-span-3">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Nome do Comprador</label>
+                                <input type="text" id="nf-buyer-name" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col md:col-span-1 print:col-span-1">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Telefone</label>
+                                <input type="text" id="nf-buyer-phone" placeholder="(00) 00000-0000" class="vintage-input w-full js-required">
+                            </div>
+                        </div>
+
+                        <!-- Linha 2: Data Nascimento, Email, CPF -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-6 mb-5">
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data de Nascimento</label>
+                                <input type="text" id="nf-birthdate-main" maxlength="10" placeholder="dd/mm/yyyy" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Email</label>
+                                <input type="email" id="nf-email" placeholder="exemplo@email.com" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CPF</label>
+                                <input type="text" id="nf-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" class="vintage-input w-full js-required">
+                            </div>
+                        </div>
+
+                        <!-- Linha 3: Endereço da Residência, Número e Complemento -->
+                        <div class="grid grid-cols-1 md:grid-cols-[10fr_3fr_7fr] print:grid-cols-[10fr_3fr_7fr] gap-6 mb-5">
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Endereço da Residência</label>
+                                <input type="text" id="nf-address" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Número</label>
+                                <input type="text" id="nf-number" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Complemento</label>
+                                <input type="text" id="nf-complement" placeholder="Opcional" class="vintage-input w-full">
+                            </div>
+                        </div>
+
+                        <!-- Linha 4: Bairro, CEP, Cidade e Data da Compra -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-6 mb-5">
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Bairro</label>
+                                <input type="text" id="nf-neighborhood" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">CEP</label>
+                                <input type="text" id="nf-zipcode" placeholder="00000-000" maxlength="9" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Cidade</label>
+                                <input type="text" id="nf-city" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Data da Compra</label>
+                                <input type="text" id="nf-purchase-date" placeholder="dd/mm/yyyy" maxlength="10" class="vintage-input w-full js-required">
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Divisor -->
+                    <div class="flex justify-center my-6 opacity-40">
+                        <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5 H100" stroke="#443c33" stroke-width="1"/>
+                        </svg>
+                    </div>
+
+                    <!-- Informações do Aparelho -->
+                    <div>
+                        <h3 class="text-xs font-bold mb-5 text-stone-800 uppercase tracking-widest border-l-4 border-stone-800 pl-2">Informações da Venda</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-6 mb-5">
+                            <div class="flex flex-col md:col-span-3 print:col-span-3">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Marca</label>
+                                <select id="nf-brand" class="vintage-input w-full js-required cursor-pointer">
+                                    <option value="">Selecione...</option>
+                                    <option value="Honor">Honor</option>
+                                    <option value="Iphone">Iphone</option>
+                                    <option value="Motorola">Motorola</option>
+                                    <option value="Poco">Poco</option>
+                                    <option value="Realme">Realme</option>
+                                    <option value="Redmi">Redmi</option>
+                                    <option value="Samsung">Samsung</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col md:col-span-5 print:col-span-5">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Modelo Celular</label>
+                                <input type="text" id="nf-model" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col md:col-span-2 print:col-span-2">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">RAM/Storage</label>
+                                <select id="nf-ram-storage" class="vintage-input w-full js-required cursor-pointer">
+                                    <option value="">Selecione...</option>
+                                    <option value="4/128">4/128</option>
+                                    <option value="6/128">6/128</option>
+                                    <option value="8/128">8/128</option>
+                                    <option value="4/256">4/256</option>
+                                    <option value="4/512">4/512</option>
+                                    <option value="8/256">8/256</option>
+                                    <option value="8/512">8/512</option>
+                                    <option value="12/256">12/256</option>
+                                    <option value="12/512">12/512</option>
+                                    <option value="16/256">16/256</option>
+                                    <option value="16/512">16/512</option>
+                                    <option value="16/1TB">16/1TB</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col md:col-span-2 print:col-span-2">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Cor</label>
+                                <input type="text" id="nf-color" class="vintage-input w-full js-required">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-6 mb-5">
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">IMEI</label>
+                                <input type="text" id="nf-imei" maxlength="15" inputmode="numeric" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Valor do Aparelho</label>
+                                <input type="text" id="nf-value" placeholder="R$ 0,00" class="vintage-input w-full js-required">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[10px] font-bold text-stone-600 uppercase tracking-widest mb-1">Forma de Pagamento</label>
+                                <select id="nf-payment" class="vintage-input w-full js-required cursor-pointer">
+                                    <option value="">Selecione...</option>
+                                    <option value="Crefaz">Crefaz</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                    <option value="Pix">Pix</option>
+                                    <option value="Crédito a vista">Crédito a vista</option>
+                                    <option value="Crédito parcelado">Crédito parcelado</option>
+                                    <option value="Débito">Débito</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Seção Acessórios -->
+                        <div class="mt-8">
+                            <div class="flex items-center justify-between mb-5 border-l-4 border-stone-800 pl-2">
+                                <h3 class="text-xs font-bold text-stone-800 uppercase tracking-widest">Acessórios</h3>
+                                <button type="button" id="add-accessory-btn" class="no-print bg-[#d6cfb8] text-stone-900 font-sans text-[10px] font-bold py-1 px-3 rounded hover:bg-[#c8c0a3] transition-all shadow-sm border border-[#a8a186] uppercase tracking-wider">
+                                    + Adicionar Acessório
+                                </button>
+                            </div>
+                            
+                            <!-- Contêiner dinâmico onde os acessórios serão inseridos -->
+                            <div id="accessories-container" class="space-y-6">
+                                <!-- Linhas de acessórios injetadas pelo JS aparecerão aqui -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensagem de erro de validação (inicialmente oculta) -->
+            <div id="validation-message" class="hidden mt-8 p-4 text-sm font-bold text-red-900 bg-red-100/90 backdrop-blur rounded border-2 border-red-800 border-dashed no-print text-center shadow-md font-sans">
+                ⚠️ Por favor, preencha todos os campos obrigatórios para poder imprimir.
+            </div>
+
+            <!-- Botões de ação com estilo clássico/stamp -->
+            <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 no-print">
+                <button onclick="validateAndPrint()" class="bg-stone-800 text-stone-100 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-stone-900 transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-stone-600 flex items-center justify-center uppercase tracking-widest">
+                    🖨️ Imprimir Termo
+                </button>
+                <button onclick="validateAndSave()" class="bg-stone-700 text-stone-100 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-stone-600 transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-stone-500 flex items-center justify-center uppercase tracking-widest">
+                    💾 Salvar Termo
+                </button>
+                <button id="fill-date-btn" class="bg-[#d6cfb8] text-stone-900 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-[#c8c0a3] transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-[#a8a186] flex items-center justify-center uppercase tracking-widest">
+                    📅 Data de Hoje
+                </button>
+                <button id="clear-btn" class="bg-red-900 text-stone-100 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-red-950 transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-red-800 flex items-center justify-center uppercase tracking-widest">
+                    ✖ Limpar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Conteúdo da Tab: HISTÓRICO -->
+        <div id="tab-content-history" class="hidden no-print">
+            <div class="bg-stone-800 rounded-xl p-6 shadow-2xl border border-stone-700 min-h-[500px]">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-['Rye'] text-[#d6cfb8] uppercase tracking-wide">Registro de Termos</h2>
+                    
+                    <!-- Controles de Data -->
+                    <div class="flex items-center bg-stone-900 p-1.5 rounded-lg border border-stone-600">
+                        <button onclick="navigateHistoryDate(-1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Dia Anterior">
+                            ⬅️
+                        </button>
+                        <input type="date" id="history-date-filter" onchange="renderHistory()" class="bg-transparent text-stone-300 border-none focus:ring-0 text-sm font-sans px-2 mx-2">
+                        <button onclick="navigateHistoryDate(1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Próximo Dia">
+                            ➡️
+                        </button>
+                        <button onclick="resetDateFilter()" class="ml-2 text-[10px] text-stone-500 hover:text-stone-300 uppercase font-bold tracking-wider px-2 border-l border-stone-700">
+                            Ver Todos
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Input Oculto para Upload de PDF -->
+                <input type="file" id="pdf-upload-input" accept="application/pdf" class="hidden">
+
+                <div id="history-list" class="space-y-6">
+                    <!-- O JS irá preencher isso -->
                 </div>
             </div>
         </div>
 
-        <!-- Mensagem de erro de validação (inicialmente oculta) -->
-        <div id="validation-message" class="hidden mt-8 p-4 text-sm font-bold text-red-900 bg-red-100/90 backdrop-blur rounded border-2 border-red-800 border-dashed no-print text-center shadow-md font-sans">
-            ⚠️ Por favor, preencha todos os campos obrigatórios para poder imprimir.
-        </div>
-
-        <!-- Botões de ação com estilo clássico/stamp -->
-        <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 no-print">
-            <button onclick="validateAndPrint()" class="bg-stone-800 text-stone-100 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-stone-900 transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-stone-600 flex items-center justify-center uppercase tracking-widest">
-                🖨️ Imprimir Termo
-            </button>
-            <button id="fill-date-btn" class="bg-[#d6cfb8] text-stone-900 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-[#c8c0a3] transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-[#a8a186] flex items-center justify-center uppercase tracking-widest">
-                📅 Data de Hoje
-            </button>
-            <button id="clear-btn" class="bg-red-900 text-stone-100 font-sans text-sm font-bold py-3 px-8 rounded hover:bg-red-950 transition-all shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-red-800 flex items-center justify-center uppercase tracking-widest">
-                ✖ Limpar
-            </button>
-        </div>
     </div>
 
     <!-- O CÓDIGO JAVASCRIPT PERMANECE INTACTO -->
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuração do Firebase fornecida
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbf5-lB50j7YgEMpjHoFccUvHOOimAqGI",
+            authDomain: "formulario-4e66d.firebaseapp.com",
+            projectId: "formulario-4e66d",
+            storageBucket: "formulario-4e66d.firebasestorage.app",
+            messagingSenderId: "220835763298",
+            appId: "1:220835763298:web:b81704cc0a3955b6022d3b",
+            measurementId: "G-H1KNNPZ6H6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Estado global para manter o histórico em tempo real
+        window.miplaceHistoryData = [];
+
+        // Expondo funções para o escopo global (necessário pois a tag <script> agora é um module)
+        window.validateAndPrint = validateAndPrint;
+        window.validateAndSave = validateAndSave;
+        window.navigateHistoryDate = navigateHistoryDate;
+        window.resetDateFilter = resetDateFilter;
+        window.renderHistory = renderHistory;
+        window.printTermFromHistory = printTermFromHistory;
+        window.triggerPdfUpload = triggerPdfUpload;
+
+        // --- LÓGICA DAS ABAS (TABS) E HISTÓRICO ---
+        
+        const tabBtnNew = document.getElementById('tab-btn-new');
+        const tabBtnHistory = document.getElementById('tab-btn-history');
+        const tabContentNew = document.getElementById('tab-content-new');
+        const tabContentHistory = document.getElementById('tab-content-history');
+
+        tabBtnNew.addEventListener('click', () => {
+            // Ativa botão
+            tabBtnNew.classList.remove('bg-stone-900', 'text-stone-500', 'border-stone-700');
+            tabBtnNew.classList.add('bg-stone-800', 'text-[#d6cfb8]', 'border-[#d6cfb8]');
+            
+            // Desativa outro botão
+            tabBtnHistory.classList.remove('bg-stone-800', 'text-[#d6cfb8]', 'border-[#d6cfb8]');
+            tabBtnHistory.classList.add('bg-stone-900', 'text-stone-500', 'border-stone-700');
+
+            // Troca conteúdo
+            tabContentNew.classList.remove('hidden');
+            tabContentHistory.classList.add('hidden');
+        });
+
+        tabBtnHistory.addEventListener('click', () => {
+            // Ativa botão
+            tabBtnHistory.classList.remove('bg-stone-900', 'text-stone-500', 'border-stone-700');
+            tabBtnHistory.classList.add('bg-stone-800', 'text-[#d6cfb8]', 'border-[#d6cfb8]');
+            
+            // Desativa outro botão
+            tabBtnNew.classList.remove('bg-stone-800', 'text-[#d6cfb8]', 'border-[#d6cfb8]');
+            tabBtnNew.classList.add('bg-stone-900', 'text-stone-500', 'border-stone-700');
+
+            // Troca conteúdo
+            tabContentHistory.classList.remove('hidden');
+            tabContentNew.classList.add('hidden');
+            
+            renderHistory();
+        });
+
+        // --- HISTÓRICO AVANÇADO ---
+
+        async function saveToHistory() {
+            // Coleta dados dos inputs simples
+            const inputs = {};
+            document.querySelectorAll('input, select').forEach(el => {
+                if(el.id) inputs[el.id] = el.value;
+            });
+
+            // Coleta acessórios
+            const accessories = [];
+            document.querySelectorAll('.accessory-row').forEach(row => {
+                const descInput = row.querySelector('.accessory-desc');
+                const valInput = row.querySelector('.accessory-val');
+                const finInput = row.querySelector('.accessory-fin');
+                
+                if(descInput && valInput && finInput) {
+                    const desc = descInput.value;
+                    const val = valInput.value;
+                    const fin = finInput.value;
+                    if(desc || val || fin) accessories.push({desc, val, fin});
+                }
+            });
+
+            // Objeto para verificação de duplicidade (ignora ID e data de criação exata)
+            const dataToCompare = {
+                store: document.getElementById('purchase-location').value,
+                customer: document.getElementById('buyer-name').value,
+                device: document.getElementById('nf-model').value,
+                type: document.getElementById('term-type').options[document.getElementById('term-type').selectedIndex].text,
+                formData: inputs,
+                accessories: accessories
+            };
+            
+            // Busca o histórico atual (nuvem ou local)
+            const historyToCheck = window.miplaceHistoryData && window.miplaceHistoryData.length > 0 
+                            ? window.miplaceHistoryData 
+                            : JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+
+            const currentCpf = inputs['cpf'] || '';
+            const currentDateStr = document.getElementById('date').value || new Date().toLocaleDateString('pt-BR');
+
+            // Verifica se já existe um registro idêntico (mesmo cliente, cpf, aparelho, loja e data)
+            const isDuplicate = historyToCheck.some(item => {
+                return item.customer === dataToCompare.customer &&
+                       item.device === dataToCompare.device &&
+                       item.store === dataToCompare.store &&
+                       item.formattedDate === currentDateStr &&
+                       item.formData && item.formData['cpf'] === currentCpf;
+            });
+            
+            // Se encontrou duplicidade exata, interrompe e avisa
+            if (isDuplicate) {
+                return 'duplicate'; 
+            }
+
+            // Coleta dados principais para resumo
+            const termData = {
+                id: Date.now(),
+                createdAt: new Date().toISOString(),
+                formattedDate: currentDateStr,
+                ...dataToCompare
+            };
+
+            try {
+                // Salva no Firebase
+                await addDoc(collection(db, 'termos_garantia'), termData);
+                return 'cloud';
+            } catch (error) {
+                console.error("Erro ao salvar no Firebase, usando fallback local:", error);
+                // Fallback para LocalStorage se Firebase falhar (Ex: sem internet)
+                let history = JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+                history.unshift(termData); // Adiciona no topo
+                localStorage.setItem('miplace_terms_history', JSON.stringify(history));
+                return 'local';
+            }
+        }
+
+        // Sincronização em tempo real com Firebase
+        onSnapshot(query(collection(db, 'termos_garantia')), (snapshot) => {
+            const history = [];
+            snapshot.forEach((doc) => {
+                history.push({ fbId: doc.id, ...doc.data() });
+            });
+            // Ordena do mais recente para o mais antigo
+            history.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+            
+            window.miplaceHistoryData = history;
+            localStorage.setItem('miplace_terms_history', JSON.stringify(history)); // Backup local
+            
+            // Atualiza a tela se a aba de histórico estiver aberta
+            if (!document.getElementById('tab-content-history').classList.contains('hidden')) {
+                renderHistory();
+            }
+        }, (error) => {
+            console.error("Erro na sincronização:", error);
+            window.miplaceHistoryData = JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+        });
+
+        // Funções de Navegação de Data
+        function navigateHistoryDate(offset) {
+            const dateInput = document.getElementById('history-date-filter');
+            // Se estiver vazio, assume hoje, senão usa o valor atual corrigindo fuso horário
+            let currentDate;
+            if (dateInput.value) {
+                const parts = dateInput.value.split('-');
+                currentDate = new Date(parts[0], parts[1] - 1, parts[2]);
+            } else {
+                currentDate = new Date();
+            }
+            
+            // Adiciona/Remove dias
+            currentDate.setDate(currentDate.getDate() + offset);
+            
+            // Formata para YYYY-MM-DD
+            const y = currentDate.getFullYear();
+            const m = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const d = String(currentDate.getDate()).padStart(2, '0');
+            
+            dateInput.value = `${y}-${m}-${d}`;
+            renderHistory();
+        }
+
+        function resetDateFilter() {
+            document.getElementById('history-date-filter').value = '';
+            renderHistory();
+        }
+
+        // Variável global para controlar qual termo está recebendo upload
+        let currentUploadId = null;
+
+        function renderHistory() {
+            // Usa os dados do Firebase, com Fallback para o localStorage
+            const history = window.miplaceHistoryData && window.miplaceHistoryData.length > 0 
+                            ? window.miplaceHistoryData 
+                            : JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+            const container = document.getElementById('history-list');
+            const dateFilter = document.getElementById('history-date-filter').value;
+            
+            if (history.length === 0) {
+                container.innerHTML = '<p class="text-stone-500 text-center italic mt-10">Nenhum termo gerado ainda.</p>';
+                return;
+            }
+
+            let filteredHistory = history;
+
+            // Filtro de Data
+            if (dateFilter) {
+                const [y, m, d] = dateFilter.split('-');
+                const searchDate = `${d}/${m}/${y}`;
+                filteredHistory = history.filter(item => item.formattedDate === searchDate);
+                
+                if (filteredHistory.length === 0) {
+                     container.innerHTML = `<p class="text-stone-500 text-center italic mt-10">Nenhum termo encontrado para ${searchDate}.</p>`;
+                     return;
+                }
+            }
+
+            // Agrupamento por Data e Loja
+            const groups = {};
+            filteredHistory.forEach(item => {
+                const dateKey = item.formattedDate;
+                if (!groups[dateKey]) groups[dateKey] = {};
+                
+                const storeKey = item.store || 'Loja não selecionada';
+                if (!groups[dateKey][storeKey]) groups[dateKey][storeKey] = [];
+                
+                groups[dateKey][storeKey].push(item);
+            });
+
+            let html = '';
+            for (const date in groups) {
+                html += `<div class="mb-8 bg-stone-900/50 p-4 rounded-lg border border-stone-700">
+                    <h3 class="text-xl font-bold text-[#d6cfb8] border-b border-stone-600 pb-2 mb-4 font-['Rye']">📅 ${date}</h3>`;
+                
+                for (const store in groups[date]) {
+                     const storeShort = store.split(',')[0];
+                     const logoUrl = (typeof logoMap !== 'undefined' && logoMap[store]) ? logoMap[store] : "https://placehold.co/120x80/d1d5db/4b5563?text=Logo";
+                     
+                     html += `<div class="ml-2 mb-6">
+                        <h4 class="text-sm font-bold text-stone-400 mb-3 uppercase tracking-widest flex items-center gap-3">
+                            <img src="${logoUrl}" class="w-8 h-8 rounded-full border border-stone-600 object-cover bg-white">
+                            ${storeShort}
+                        </h4>
+                        <div class="overflow-x-auto rounded-lg border border-stone-700">
+                            <table class="w-full text-sm text-left text-stone-300">
+                                <thead class="text-xs text-stone-400 uppercase bg-stone-800">
+                                    <tr>
+                                        <th class="px-4 py-3">Cliente</th>
+                                        <th class="px-4 py-3">Aparelho</th>
+                                        <th class="px-4 py-3">Tipo de Termo</th>
+                                        <th class="px-4 py-3 text-center">Arquivo</th>
+                                        <th class="px-4 py-3 text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                     
+                     groups[date][store].forEach(item => {
+                        const hasPdf = !!item.signedPdf;
+                        
+                        html += `<tr class="border-b border-stone-700 hover:bg-stone-800/80 transition-colors">
+                            <td class="px-4 py-3 font-medium text-white font-['Caveat'] text-lg">${item.customer || 'Sem nome'}</td>
+                            <td class="px-4 py-3">${item.device || '-'}</td>
+                            <td class="px-4 py-3 text-xs uppercase tracking-wide text-stone-500">${item.type}</td>
+                            <td class="px-4 py-3 text-center">
+                                <button onclick="printTermFromHistory(${item.id})" class="text-stone-400 hover:text-green-400 transition-colors text-xl flex items-center justify-center mx-auto gap-1" title="${hasPdf ? 'Imprimir PDF Assinado' : 'Imprimir Termo Gerado'}">
+                                    ${hasPdf ? '📄<span class="text-[10px] text-green-400 ml-1">PDF</span>' : '📄'}
+                                </button>
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                <button onclick="triggerPdfUpload(${item.id})" class="text-stone-400 hover:text-blue-400 transition-colors text-lg" title="${hasPdf ? 'Substituir PDF Assinado' : 'Anexar PDF Assinado'}">
+                                    ${hasPdf ? '✅' : '📎'}
+                                </button>
+                            </td>
+                        </tr>`;
+                     });
+
+                     html += `</tbody></table></div></div>`;
+                }
+                html += `</div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        // Função para acionar o upload
+        function triggerPdfUpload(id) {
+            currentUploadId = id;
+            document.getElementById('pdf-upload-input').click();
+        }
+
+        // Listener para o input de arquivo
+        document.getElementById('pdf-upload-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (file.type !== 'application/pdf') {
+                alert('Apenas arquivos PDF são permitidos.');
+                return;
+            }
+
+            // Limite de segurança reduzido para ~700KB para obedecer o limite de 1MB por documento do Firebase
+            if (file.size > 700 * 1024) {
+                alert('O arquivo é muito grande (Máx 700KB). Por limitações do banco de dados (Firebase), reduza o tamanho do PDF.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                const base64String = event.target.result;
+                
+                try {
+                    const history = window.miplaceHistoryData && window.miplaceHistoryData.length > 0 
+                                    ? window.miplaceHistoryData 
+                                    : JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+                    const itemIndex = history.findIndex(item => item.id === currentUploadId);
+                    
+                    if (itemIndex !== -1) {
+                        const item = history[itemIndex];
+                        if (item.fbId) {
+                            // Salva no Firebase
+                            await updateDoc(doc(db, 'termos_garantia', item.fbId), { signedPdf: base64String });
+                            alert('✅ PDF anexado com sucesso no Firebase!');
+                        } else {
+                            // Fallback LocalStorage
+                            history[itemIndex].signedPdf = base64String;
+                            localStorage.setItem('miplace_terms_history', JSON.stringify(history));
+                            renderHistory();
+                            alert('✅ PDF anexado com sucesso localmente!');
+                        }
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('❌ Erro ao salvar PDF. Verifique sua conexão ou limite de armazenamento do Firebase.');
+                }
+                
+                // Limpa o input para permitir selecionar o mesmo arquivo novamente se necessário
+                document.getElementById('pdf-upload-input').value = '';
+                currentUploadId = null;
+            };
+            
+            reader.readAsDataURL(file);
+        });
+
+        function loadTermFromHistory(id) {
+            const history = window.miplaceHistoryData && window.miplaceHistoryData.length > 0 
+                            ? window.miplaceHistoryData 
+                            : JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+            const term = history.find(t => t.id === id);
+            
+            if(!term) return;
+
+            document.getElementById('tab-btn-new').click();
+            const accessoriesContainer = document.getElementById('accessories-container');
+            accessoriesContainer.innerHTML = ''; 
+
+            if(term.formData) {
+                // Restaura Tipo e Loja primeiro
+                if(term.formData['term-type']) {
+                    const el = document.getElementById('term-type');
+                    el.value = term.formData['term-type'];
+                    el.dispatchEvent(new Event('change'));
+                }
+                if(term.formData['purchase-location']) {
+                    const el = document.getElementById('purchase-location');
+                    el.value = term.formData['purchase-location'];
+                    el.dispatchEvent(new Event('change'));
+                }
+                
+                // Restaura o restante
+                for(const key in term.formData) {
+                    if(key === 'term-type' || key === 'purchase-location') continue;
+                    const el = document.getElementById(key);
+                    if(el) {
+                        el.value = term.formData[key];
+                        el.dispatchEvent(new Event('input'));
+                    }
+                }
+            }
+            
+            if(term.accessories && term.accessories.length > 0) {
+                term.accessories.forEach(acc => {
+                    addAccessoryRow();
+                    const rows = accessoriesContainer.querySelectorAll('.accessory-row');
+                    const lastRow = rows[rows.length-1];
+                    if(lastRow) {
+                        lastRow.querySelector('.accessory-desc').value = acc.desc;
+                        lastRow.querySelector('.accessory-val').value = acc.val;
+                        lastRow.querySelector('.accessory-fin').value = acc.fin;
+                    }
+                });
+            }
+            
+            // Rola para o topo para mostrar o termo preenchido
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Feedback visual
+            const tabBtnNew = document.getElementById('tab-btn-new');
+            tabBtnNew.classList.add('ring-2', 'ring-[#d6cfb8]');
+            setTimeout(() => tabBtnNew.classList.remove('ring-2', 'ring-[#d6cfb8]'), 1000);
+        }
+
+        function printTermFromHistory(id) {
+            const history = window.miplaceHistoryData && window.miplaceHistoryData.length > 0 
+                            ? window.miplaceHistoryData 
+                            : JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+            const term = history.find(t => t.id === id);
+
+            if (term && term.signedPdf) {
+                // Se tiver PDF assinado, abre o PDF
+                const win = window.open();
+                win.document.write(`<iframe src="${term.signedPdf}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
+                win.document.title = `Termo Assinado - ${term.customer}`;
+            } else {
+                // Se não, carrega os dados e imprime o formulário HTML
+                loadTermFromHistory(id);
+
+                // Aguarda um pequeno intervalo para garantir que o DOM foi atualizado
+                setTimeout(() => {
+                    window.print();
+                }, 500);
+            }
+        }
+
+        async function deleteHistoryItem(id) {
+            if(confirm('Tem certeza que deseja excluir este registro?')) {
+                const history = window.miplaceHistoryData || JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+                const item = history.find(t => t.id === id);
+                
+                if (item && item.fbId) {
+                    try {
+                        await deleteDoc(doc(db, 'termos_garantia', item.fbId));
+                    } catch (e) {
+                        console.error("Erro ao deletar do Firebase", e);
+                    }
+                } else {
+                    let localHistory = JSON.parse(localStorage.getItem('miplace_terms_history') || '[]');
+                    localHistory = localHistory.filter(i => i.id !== id);
+                    localStorage.setItem('miplace_terms_history', JSON.stringify(localHistory));
+                    renderHistory();
+                }
+            }
+        }
+
+        function clearHistory() {
+            if(confirm('Tem certeza que deseja apagar TODO o histórico local? Os dados do Firebase não serão apagados por segurança.')) {
+                localStorage.removeItem('miplace_terms_history');
+                renderHistory();
+            }
+        }
+
+        // --- FIM DA LÓGICA DE ABAS ---
+
+
         // Função para formatar a data (mantida)
         function formatDate(dateInput) {
             let value = dateInput.value.replace(/\D/g, '');
@@ -918,8 +1420,73 @@
             document.getElementById('accessories-container').innerHTML = '';
         }
 
+        // Função para validar e salvar (sem imprimir)
+        async function validateAndSave() {
+            const fields = document.querySelectorAll('.js-required');
+            let allFieldsFilled = true;
+            let cpfValido = true;
+
+            fields.forEach(field => field.classList.remove('invalid-field'));
+
+            fields.forEach(field => {
+                if (field.value.trim() === '') {
+                    field.classList.add('invalid-field');
+                    allFieldsFilled = false;
+                }
+            });
+
+            const cpf1 = document.getElementById('cpf');
+            const cpf2 = document.getElementById('nf-cpf');
+
+            if (cpf1 && cpf1.value.trim() !== '' && !isValidCPF(cpf1.value)) {
+                cpf1.classList.add('invalid-field');
+                cpfValido = false;
+            }
+            if (cpf2 && cpf2.value.trim() !== '' && !isValidCPF(cpf2.value)) {
+                cpf2.classList.add('invalid-field');
+                cpfValido = false;
+            }
+
+            const validationMessage = document.getElementById('validation-message');
+            
+            if (allFieldsFilled && cpfValido) {
+                validationMessage.classList.add('hidden');
+                
+                // Feedback visual de carregamento no botão
+                const btnSave = document.querySelector('button[onclick="validateAndSave()"]');
+                const originalText = btnSave.innerHTML;
+                btnSave.innerHTML = '⏳ Salvando...';
+                btnSave.disabled = true;
+
+                const saveResult = await saveToHistory();
+                renderHistory(); // Atualiza a lista imediatamente
+                
+                // Restaura o botão
+                btnSave.innerHTML = originalText;
+                btnSave.disabled = false;
+
+                if (saveResult === 'duplicate') {
+                    alert('⚠️ Este termo já está salvo no histórico de hoje! Se for uma nova venda, altere os dados (ex: Cliente, Aparelho ou CPF).');
+                } else if (saveResult === 'cloud') {
+                    alert('☁️✅ Termo salvo com sucesso na Nuvem!');
+                    clearFields();
+                } else {
+                    alert('💾✅ Sem conexão: Termo salvo apenas no Histórico Local.');
+                    clearFields();
+                }
+            } else {
+                validationMessage.classList.remove('hidden');
+                if (!allFieldsFilled) {
+                    validationMessage.innerHTML = '⚠️ Por favor, preencha todos os campos obrigatórios para salvar.';
+                } else {
+                    validationMessage.innerHTML = '⚠️ O CPF informado é inválido.';
+                }
+                window.scrollTo(0, 0);
+            }
+        }
+
         // Função para validar e imprimir
-        function validateAndPrint() {
+        async function validateAndPrint() {
             const fields = document.querySelectorAll('.js-required');
             let allFieldsFilled = true;
             let cpfValido = true;
@@ -953,7 +1520,15 @@
             const validationMessage = document.getElementById('validation-message');
             if (allFieldsFilled && cpfValido) {
                 validationMessage.classList.add('hidden');
-                window.print();
+                // Salva automaticamente ao imprimir para garantir registro (aguarda conclusão)
+                await saveToHistory();
+                renderHistory();
+                
+                // Aguarda um breve momento para garantir que o salvamento ocorreu antes de travar a thread com print
+                setTimeout(() => {
+                    window.print();
+                    clearFields();
+                }, 100);
             } else {
                 validationMessage.classList.remove('hidden');
                 // Altera a mensagem de erro dinamicamente dependendo de qual for a falha
