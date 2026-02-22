@@ -717,18 +717,26 @@
                 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     <h2 class="text-2xl font-['Rye'] text-[#d6cfb8] uppercase tracking-wide">Registro de Termos</h2>
                     
-                    <!-- Controles de Data -->
-                    <div class="flex items-center bg-stone-900 p-1.5 rounded-lg border border-stone-600">
-                        <button onclick="navigateHistoryDate(-1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Dia Anterior">
-                            ⬅️
-                        </button>
-                        <input type="date" id="history-date-filter" onchange="renderHistory()" class="bg-transparent text-stone-300 border-none focus:ring-0 text-sm font-sans px-2 mx-2">
-                        <button onclick="navigateHistoryDate(1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Próximo Dia">
-                            ➡️
-                        </button>
-                        <button onclick="resetDateFilter()" class="ml-2 text-[10px] text-stone-500 hover:text-stone-300 uppercase font-bold tracking-wider px-2 border-l border-stone-700">
-                            Ver Todos
-                        </button>
+                    <!-- Filtros (Pesquisa e Data) -->
+                    <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                        <!-- Busca Nome/CPF -->
+                        <div class="relative w-full sm:w-auto">
+                            <input type="text" id="history-search-filter" oninput="renderHistory()" placeholder="🔍 Buscar Cliente ou CPF" class="w-full sm:w-56 bg-stone-900 text-stone-300 border border-stone-600 rounded-lg px-3 py-1.5 text-sm focus:ring-1 focus:ring-stone-400 focus:outline-none placeholder-stone-500">
+                        </div>
+                        
+                        <!-- Controles de Data -->
+                        <div class="flex items-center w-full sm:w-auto bg-stone-900 p-1.5 rounded-lg border border-stone-600 justify-between sm:justify-start">
+                            <button onclick="navigateHistoryDate(-1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Dia Anterior">
+                                ⬅️
+                            </button>
+                            <input type="date" id="history-date-filter" onchange="renderHistory()" class="bg-transparent text-stone-300 border-none focus:ring-0 text-sm font-sans px-2 mx-2">
+                            <button onclick="navigateHistoryDate(1)" class="p-2 text-stone-400 hover:text-white hover:bg-stone-700 rounded transition-colors" title="Próximo Dia">
+                                ➡️
+                            </button>
+                            <button onclick="resetDateFilter()" class="ml-2 text-[10px] text-stone-500 hover:text-stone-300 uppercase font-bold tracking-wider px-2 border-l border-stone-700">
+                                Ver Todos
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -774,12 +782,24 @@
         window.printTermFromHistory = printTermFromHistory;
         window.triggerPdfUpload = triggerPdfUpload;
 
+        // Variável para evitar salvamento duplicado do mesmo termo
+        let lastSavedTermString = null;
+
         // --- LÓGICA DAS ABAS (TABS) E HISTÓRICO ---
         
         const tabBtnNew = document.getElementById('tab-btn-new');
         const tabBtnHistory = document.getElementById('tab-btn-history');
         const tabContentNew = document.getElementById('tab-content-new');
         const tabContentHistory = document.getElementById('tab-content-history');
+
+        // Configura a data de hoje como padrão no campo de pesquisa por dia
+        // (O navegador renderiza automaticamente no formato brasileiro DD/MM/AAAA)
+        const historyDateInput = document.getElementById('history-date-filter');
+        const todayForFilter = new Date();
+        const filterY = todayForFilter.getFullYear();
+        const filterM = String(todayForFilter.getMonth() + 1).padStart(2, '0');
+        const filterD = String(todayForFilter.getDate()).padStart(2, '0');
+        historyDateInput.value = `${filterY}-${filterM}-${filterD}`;
 
         tabBtnNew.addEventListener('click', () => {
             // Ativa botão
@@ -961,12 +981,26 @@
             if (dateFilter) {
                 const [y, m, d] = dateFilter.split('-');
                 const searchDate = `${d}/${m}/${y}`;
-                filteredHistory = history.filter(item => item.formattedDate === searchDate);
-                
-                if (filteredHistory.length === 0) {
-                     container.innerHTML = `<p class="text-stone-500 text-center italic mt-10">Nenhum termo encontrado para ${searchDate}.</p>`;
-                     return;
-                }
+                filteredHistory = filteredHistory.filter(item => item.formattedDate === searchDate);
+            }
+
+            // Filtro de Pesquisa (Nome ou CPF)
+            const searchInput = document.getElementById('history-search-filter');
+            const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            if (searchVal) {
+                filteredHistory = filteredHistory.filter(item => {
+                    const name = (item.customer || '').toLowerCase();
+                    const cpf = (item.formData && item.formData['cpf']) ? item.formData['cpf'] : '';
+                    const cleanCpf = cpf.replace(/\D/g, ''); // Apenas números do CPF salvo
+                    const cleanSearch = searchVal.replace(/\D/g, ''); // Apenas números da pesquisa
+                    
+                    return name.includes(searchVal) || cpf.includes(searchVal) || (cleanSearch !== '' && cleanCpf.includes(cleanSearch));
+                });
+            }
+
+            if (filteredHistory.length === 0) {
+                 container.innerHTML = `<p class="text-stone-500 text-center italic mt-10">Nenhum termo encontrado com os filtros atuais.</p>`;
+                 return;
             }
 
             // Agrupamento por Data e Loja
@@ -1000,6 +1034,7 @@
                                 <thead class="text-xs text-stone-400 uppercase bg-stone-800">
                                     <tr>
                                         <th class="px-4 py-3">Cliente</th>
+                                        <th class="px-4 py-3 text-center">CPF</th>
                                         <th class="px-4 py-3">Aparelho</th>
                                         <th class="px-4 py-3">Tipo de Termo</th>
                                         <th class="px-4 py-3 text-center">Arquivo</th>
@@ -1010,9 +1045,11 @@
                      
                      groups[date][store].forEach(item => {
                         const hasPdf = !!item.signedPdf;
+                        const displayCpf = (item.formData && item.formData['cpf']) ? item.formData['cpf'] : '-';
                         
                         html += `<tr class="border-b border-stone-700 hover:bg-stone-800/80 transition-colors">
                             <td class="px-4 py-3 font-medium text-white font-['Caveat'] text-lg">${item.customer || 'Sem nome'}</td>
+                            <td class="px-4 py-3 text-center text-stone-400 font-mono text-xs tracking-wider">${displayCpf}</td>
                             <td class="px-4 py-3">${item.device || '-'}</td>
                             <td class="px-4 py-3 text-xs uppercase tracking-wide text-stone-500">${item.type}</td>
                             <td class="px-4 py-3 text-center">
