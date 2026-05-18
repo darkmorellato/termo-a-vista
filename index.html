@@ -396,7 +396,7 @@
                             </li>
                         </ul>
 
-                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA QUINTA - DA GESTÃO DA CONTA E SENHA PESSOAL</h2>
+                        <h2 class="text-lg font-bold text-stone-900 mb-3 border-b border-stone-400 border-dashed pb-2 font-serif uppercase tracking-wide mt-8">CLÁUSULA GESTÃO DA CONTA E SENHA PESSOAL</h2>
                         <p class="mb-6">
                             <strong>5.1.</strong> A senha e a conta iCloud são de responsabilidade exclusiva do cliente, que as define no momento da ativação. A MiPlace não insere, armazena ou altera senhas. Qualquer bloqueio ou perda de acesso deve ser resolvido diretamente com o suporte da Apple, não havendo responsabilidade da loja por esquecimento, gerenciamento da conta ou recuperação de acesso.
                         </p>
@@ -1825,6 +1825,204 @@
                 howKnewInput.placeholder = "Selecione a loja primeiro";
             }
         });
+
+        // --- AUTO-PREENCHIMENTO COMPLETO VIA URL QUERY PARAMS ---
+        function preFillFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            
+            // 1. Local / Loja (Dispara evento 'change' automático para renderizar o logo, telefone e opções de vendedores)
+            const lojaParam = params.get('loja');
+            if (lojaParam) {
+                const purchaseLocationSelect = document.getElementById('purchase-location');
+                for (let i = 0; i < purchaseLocationSelect.options.length; i++) {
+                    const option = purchaseLocationSelect.options[i];
+                    if (option.value.toLowerCase().includes(lojaParam.toLowerCase())) {
+                        purchaseLocationSelect.selectedIndex = i;
+                        purchaseLocationSelect.dispatchEvent(new Event('change'));
+                        break;
+                    }
+                }
+            }
+
+            // 2. Dados do Comprador / Cliente
+            const nomeParam = params.get('nome');
+            if (nomeParam) {
+                document.getElementById('buyer-name').value = nomeParam;
+                document.getElementById('nf-buyer-name').value = nomeParam;
+            }
+
+            const cpfParam = params.get('cpf');
+            if (cpfParam) {
+                const cpfInput = document.getElementById('cpf');
+                const nfCpfInput = document.getElementById('nf-cpf');
+                cpfInput.value = cpfParam;
+                nfCpfInput.value = cpfParam;
+                formatCPF(cpfInput);
+                formatCPF(nfCpfInput);
+            }
+
+            const celularParam = params.get('celular');
+            if (celularParam) {
+                const phoneInput = document.getElementById('nf-buyer-phone');
+                phoneInput.value = celularParam;
+                formatPhone(phoneInput);
+            }
+
+            const nascimentoParam = params.get('nascimento');
+            if (nascimentoParam) {
+                document.getElementById('nf-birthdate-main').value = nascimentoParam;
+            }
+
+            const emailParam = params.get('email');
+            if (emailParam) {
+                document.getElementById('nf-email').value = emailParam;
+            }
+
+            const enderecoParam = params.get('endereco');
+            if (enderecoParam) {
+                document.getElementById('nf-address').value = enderecoParam;
+            }
+
+            const numeroParam = params.get('numero');
+            if (numeroParam) {
+                document.getElementById('nf-number').value = numeroParam;
+            }
+
+            const bairroParam = params.get('bairro');
+            if (bairroParam) {
+                document.getElementById('nf-neighborhood').value = bairroParam;
+            }
+
+            const cidadeParam = params.get('cidade');
+            const estadoParam = params.get('estado');
+            if (cidadeParam) {
+                let cityValue = cidadeParam;
+                if (estadoParam && !cidadeParam.toLowerCase().includes(estadoParam.toLowerCase())) {
+                    cityValue += ' - ' + estadoParam;
+                }
+                document.getElementById('nf-city').value = cityValue;
+            }
+
+            const cepParam = params.get('cep');
+            if (cepParam) {
+                const zipInput = document.getElementById('nf-zipcode');
+                zipInput.value = cepParam;
+                formatCEP(zipInput);
+            }
+
+            const dataCompraParam = params.get('data_compra');
+            if (dataCompraParam) {
+                document.getElementById('date').value = dataCompraParam;
+                document.getElementById('nf-purchase-date').value = dataCompraParam;
+            }
+
+            // 3. Informações do Aparelho (Marca e Tipo de Termo)
+            const marcaParam = params.get('marca');
+            if (marcaParam) {
+                if (marcaParam.toLowerCase() === 'iphone') {
+                    const termTypeSelect = document.getElementById('term-type');
+                    termTypeSelect.value = 'iphone';
+                    termTypeSelect.dispatchEvent(new Event('change'));
+                } else {
+                    const nfBrandSelect = document.getElementById('nf-brand');
+                    for (let i = 0; i < nfBrandSelect.options.length; i++) {
+                        const option = nfBrandSelect.options[i];
+                        if (option.value.toLowerCase() === marcaParam.toLowerCase()) {
+                            nfBrandSelect.selectedIndex = i;
+                            nfBrandSelect.dispatchEvent(new Event('change'));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            const modeloParam = params.get('modelo');
+            if (modeloParam) {
+                document.getElementById('nf-model').value = modeloParam;
+            }
+
+            const ramStoreParam = params.get('ram_store');
+            if (ramStoreParam) {
+                const nfRamStorageSelect = document.getElementById('nf-ram-storage');
+                for (let i = 0; i < nfRamStorageSelect.options.length; i++) {
+                    const option = nfRamStorageSelect.options[i];
+                    if (option.value === ramStoreParam) {
+                        nfRamStorageSelect.selectedIndex = i;
+                        nfRamStorageSelect.dispatchEvent(new Event('change'));
+                        break;
+                    }
+                }
+            }
+
+            const corParam = params.get('cor');
+            if (corParam) {
+                document.getElementById('nf-color').value = corParam;
+            }
+
+            const imeiParam = params.get('imei');
+            if (imeiParam) {
+                document.getElementById('nf-imei').value = imeiParam;
+            }
+
+            // 4. Valores e Forma de Pagamento
+            const entradaValorParam = params.get('entrada_valor');
+            if (entradaValorParam) {
+                const valueInput = document.getElementById('nf-value');
+                valueInput.value = entradaValorParam;
+                formatCurrency(valueInput);
+            }
+
+            const entradaFormaParam = params.get('entrada_forma');
+            if (entradaFormaParam) {
+                const nfPaymentSelect = document.getElementById('nf-payment');
+                
+                // Mapeamento inteligente de formas de pagamento do dashboard para as opções do select do Termo
+                const paymentMapping = {
+                    'dinheiro': 'Dinheiro',
+                    'pix': 'Pix',
+                    'débito': 'Débito',
+                    'debito': 'Débito',
+                    'crédito a vista': 'Crédito a vista',
+                    'credito a vista': 'Crédito a vista',
+                    'crédito parcelado': 'Crédito parcelado',
+                    'credito parcelado': 'Crédito parcelado',
+                    'financiado crefaz': 'Crefaz',
+                    'crefaz': 'Crefaz'
+                };
+
+                const mappedValue = paymentMapping[entradaFormaParam.toLowerCase()];
+                if (mappedValue) {
+                    nfPaymentSelect.value = mappedValue;
+                } else {
+                    // Tenta achar alguma opção parcial compatível
+                    for (let i = 0; i < nfPaymentSelect.options.length; i++) {
+                        const option = nfPaymentSelect.options[i];
+                        if (option.value.toLowerCase().includes(entradaFormaParam.toLowerCase()) || 
+                            entradaFormaParam.toLowerCase().includes(option.value.toLowerCase())) {
+                            nfPaymentSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                nfPaymentSelect.dispatchEvent(new Event('change'));
+            }
+
+            // 5. Aciona os eventos de atualização de input para atualizar a declaração final automaticamente
+            const buyerInput = document.getElementById('buyer-name');
+            const mainCpfInput = document.getElementById('cpf');
+            buyerInput.dispatchEvent(new Event('input'));
+            mainCpfInput.dispatchEvent(new Event('input'));
+            
+            // Atualiza a declaração e o contrato com as informações preenchidas
+            updateTermContent();
+        }
+
+        // Executa o auto-preenchimento ao carregar a página
+        window.addEventListener('DOMContentLoaded', preFillFromURL);
+        // Fallback rápido se o evento DOMContentLoaded já tiver sido disparado
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            preFillFromURL();
+        }
     </script>
 </body>
 </html>
